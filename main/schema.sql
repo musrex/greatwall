@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS menu;
+
+CREATE TABLE user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+CREATE TABLE menu(
+    author_id INTEGER NOT NULL,
+    category TEXT NOT NULL,
+    code TEXT UNIQUE NOT NULL,
+    dish TEXT UNIQUE NOT NULL,
+    price INTEGER NOT NULL,
+    FOREIGN KEY (author_id) REFERENCES user (id)
+);

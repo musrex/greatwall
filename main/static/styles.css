@@ -1,0 +1,155 @@
+:root {
+    --main-bg-color: #e8e9ea;
+    --main-element-color: #dddddd;
+}
+
+html {
+    background-color: var(--main-bg-color);
+    font-family: sans-serif;
+    height: 100vh;
+    width: auto;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: .5em;
+}
+
+/****** GREAT WALL HEADER ******
+--------------------------------
+|  This sectoion contains the  |
+|  CSS for the header section  |
+|  with the address, phone num,|
+|  hours, etc.                 |
+--------------------------------
+********************************/
+
+#header {
+    margin: 1em;
+    grid-column-start:1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    text-align: center;
+    background-color: var(--main-element-color);
+    width: 20em;
+}
+
+#logo {
+    margin: auto;
+    width: 90%;
+    margin-bottom: -.5em;
+}
+
+#mast h2 {
+    font-size: 1em;
+    font-style: italic;
+    margin-bottom: -.5em;
+}
+
+#address p {
+    margin: 0 0;
+}
+
+#address > p:nth-child(1) {
+    color: red;
+    font-weight: bolder;
+}
+
+#address > p:nth-child(3),
+#address > p:nth-child(4){
+    font-weight: bolder;
+}
+
+address {
+    margin-top: 2em;
+}
+
+#call {
+    max-width: fit-content;
+    max-height: 100px;
+    margin: auto auto 0;
+    margin-top: 2em;
+    border-style: solid;
+    border-color: black;
+    border-width: 4px;
+    padding: 0 6px;
+}
+
+#call p:nth-child(2) {
+    font-weight: bolder;
+    margin: .15em;
+}
+
+#call p:nth-child(3) {
+    font-weight: bolder;
+    margin: .15em;
+    margin-bottom: .25em;
+}
+
+#please-call {
+    font-weight: 400;
+    width: 8em;
+    margin: auto;
+    margin-top: -.65em;
+    background-color: var(--main-element-color);
+}
+
+#party {
+    margin: 2em;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+#hours p {
+    margin: 0;
+}
+
+#hours {
+    margin: 2em 0 5em;
+}
+
+/************ MENUS ************
+--------------------------------
+|  This sectoion contains the  |
+|  CSS for the menu section    |
+|  with the different orders,  |
+|  specials, etc.              |
+--------------------------------
+********************************/
+
+#menu {
+    margin: 1em;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    background-color: var(--main-element-color);
+    width: 20em;
+}
+
+#menu h2 {
+    text-align: center;
+    
+}
+
+
+
+/************ AUTH *************
+--------------------------------
+|  This sectoion contains the  |
+|  CSS for the AUTH sections,  |
+|  i.e. the register, log in,  |
+|  and password reset views.   |
+--------------------------------
+********************************/
+
+.auth {
+    padding: 1em;
+    display: flex;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: var(--main-element-color);
+}

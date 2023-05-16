@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Great Wall</title> 
+        <meta charset="utf-8">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Carter+One&family=Mogra&display=swap');
+        </style>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+        <!-- Babel script -->
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="{{ url_for('static', filename='scripts.js') }}" type="text/jsx"></script>   
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+       
+    </body>
+</html>

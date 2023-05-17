@@ -22,8 +22,14 @@ def index():
 @bp.route('/create', methods=('GET','POST'))
 @login_required
 def create():
+    db = get_db()
+    # this is to populate the 'categories' drop down menu
+    menus = db.execute(
+    'SELECT * FROM menu ORDER BY category ASC'
+    ).fetchall()
+    
     if request.method == 'POST':
-        category  = request.form['category']
+        category  = (request.form['category']) or (request.form['existing_category'])
         code = request.form['code']
         dish = request.form['dish']
         price = request.form['price']
@@ -37,21 +43,22 @@ def create():
             error = 'Name is required.'
         if not price:
             error = 'Price is required.'
-        
+
         if error is not None:
             flash(error)
         else:
-            db = get_db()
+            # this is to check if the 'category' input is already in the
+            # db, if not we add it
             query = db.execute(
                 'SELECT * FROM menu WHERE category = ?', (category,)
             ).fetchone()
-
             if query is None:
                 db.execute(
                 'INSERT INTO menu (category) VALUES (?)',
                 (category,),
             ) 
 
+            # this is to record the values for the new entry
             db.execute(
                 'INSERT INTO item (category, code, dish, price, author_id)'
                 ' VALUES (?, ?, ?, ?, ?)',
@@ -59,4 +66,7 @@ def create():
             )
             db.commit()
             return redirect(url_for('index'))
-    return render_template('menu/create.html')
+        
+
+
+    return render_template('menu/create.html', menus=menus)

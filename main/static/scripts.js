@@ -1,65 +1,24 @@
-// Select the div element with 'app' id
-const header = document.getElementById('header');
-const menu = document.getElementById('menu');
-            
-function Header({ title }) {
-    return (
-        <div>
-            <div id="mast">
-                <h1><img id="logo"
-                src="static/greatwall.svg"
-                alt="Great Wall"/>
-                </h1>
-                <h2>Cantonese & Szechuan Cuisine</h2>
-                <p><img src="static/greatwall.png"></img></p>
-            </div>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const add_item = document.getElementById('add_item');
 
-            <div id="address">
-                <p>EAT IN OR TAKE OUT</p>
-                <p>FOR ORDERS TO GO</p>
-                <p>5 Central Street,</p>
-                <p>Baldwinville, MA 01436</p>
-            </div>
+    function addItem(htmlStr) {
+        let frag = document.createDocumentFragment(),
+            temp = document.createElement('div');
+        temp.innerHTML = htmlStr;
+        while (temp.firstChild) {
+            frag.appendChild(temp.firstChild);
+        }
+        return frag;
+    };
 
-            <div id="call">
-                <p id="please-call">PLEASE CALL</p>
-                <p>Tel.: <a href="tel:9789398600">(978) 939-8600</a></p>
-                <p><a href="tel:9789398200">(978) 939-8200</a></p>
-            </div>
-
-            <div id="party">
-                <p>Party & Catering welcome!</p>
-            </div>
-
-            <div id="hours">
-                <p>OPEN HOURS</p>
-                <p>Mon - Thu 11 AM-9:30 PM</p>
-                <p>Fri - Sat 11 AM-10 PM</p>
-                <p>Sun 11 AM-9:30 PM</p>
-            </div>
-        </div>
-);
-    }
-
-/* function Menu({category}) {
-    return (
-        <div>
-            <h2>{category}</h2>
-
-        </div>
-    );
-} */
-
-
-
-
-
-ReactDOM.render(<Header title="Great Wall" />, header)
-/* ReactDOM.render(<Menu category="Luncheon Special" />, menu) */
-
+    let fragment = addItem(
+    '<label for="code">Code</label><input name="code" required /><label for="dish">Name</label><input name="dish" required /><label for="price">Price</label><input name="price" required />');
+    
+    add_item.addEventListener("click", document.body.insertAdjacentElement(fragment, document.body.childNodes[8]));
+});
 
 function leftPad(str, len, ch){
-    return new Array(len - str.lenth).fill(!ch && ch !== 0 ? ' ':
+    return new Array(len - str.length).fill(!ch && ch !== 0 ? ' ':
     ch).join("") + str
 
-}
+};

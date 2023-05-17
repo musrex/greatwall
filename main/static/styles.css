@@ -11,6 +11,7 @@ html {
 }
 
 body {
+    font-size: 100%;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -135,16 +136,34 @@ address {
 
 .items {
     margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .items p {
     display: inline;
+    padding-bottom: .25em;
+    border-bottom: 1.5px dashed black;
 }
 
 .code {
-    margin: 0 1em 0 1em;
+    grid-column-start: 1;
+    margin-left: 1em;
 }
 
+.dish {
+    grid-column-start: 2;
+    margin-left: -3em;
+}
+
+.price {
+    grid-column-start: 3;
+    max-width: max-content;
+}
+
+.menu input, .menu label {
+    display: block;
+}
 
 
 /************ AUTH *************

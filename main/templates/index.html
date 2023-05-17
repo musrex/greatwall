@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<header id="header">
+</header>
 
-<header id="header"></header>
 <main class="menu">
     {% for menu in menus %}
     <div class="boxes">
@@ -13,7 +14,7 @@
                     {% if menu['category'] == item['category'] %}
                         <p class="code">{{ item['code'] }}</p>
                         <p class="dish">{{ item['dish'] }}</p>
-                        <p class="price">.... {{ item['price'] }}</p>
+                        <p class="price">{{ item['price'] }}</p>
                     {% endif %}
                 </article>
                 {% endfor %}

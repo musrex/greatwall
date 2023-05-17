@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="menu">
+<h1>Menu Maker</h1>
+    <form id="maker" method="post">
+        <label for="category">Menu Title</label>
+        <input name="category" id="category" required />
+        <label for="code">Dish Code</label>
+        <input name="code" required />
+        <label for="dish">Dish Name</label>
+        <input name="dish" required />
+        <label for="price">Dish Price</label>
+        <input name="price" required />
+    <input type="submit" value="save"/>
+    </form>
+    <button id="add_item" type="button">Add Menu Item</button>
+</main>
+{% endblock %}

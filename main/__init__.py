@@ -31,10 +31,8 @@ def create_app(test_config=None):
     from . import auth
     app.register_blueprint(auth.bp)
     
-    @app.route('/')
-    def greatwall():
-        return render_template('index.html')
-    
+    from . import menu
+    app.register_blueprint(menu.bp)
     app.add_url_rule('/', endpoint='index')
     
     return app

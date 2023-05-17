@@ -3,6 +3,26 @@
 {% block content %}
 
 <header id="header"></header>
-<main id="menu"></main>
+<main class="menu">
+    {% for menu in menus %}
+    <div class="boxes">
+    <h2>{{ menu['category'] }}</h2>
+        
+                {% for item in items %}
+                <article class="items">
+                    {% if menu['category'] == item['category'] %}
+                        <p class="code">{{ item['code'] }}</p>
+                        <p class="dish">{{ item['dish'] }}</p>
+                        <p class="price">.... {{ item['price'] }}</p>
+                    {% endif %}
+                </article>
+                {% endfor %}
+    </div>
+    {% endfor %}
+</main>
+
+{% if g.user %} 
+<p><a href="{{ url_for('admin.create') }}">Manage Menu's</a></p>
+{% endif %}
 
 {% endblock %}

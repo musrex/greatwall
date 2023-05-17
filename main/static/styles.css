@@ -120,17 +120,29 @@ address {
 --------------------------------
 ********************************/
 
-#menu {
+.boxes {
     margin: 1em;
     grid-row-start: 1;
     grid-column-start: 2;
     background-color: var(--main-element-color);
     width: 20em;
+    padding: .25em;
 }
 
-#menu h2 {
+.boxes h2{
     text-align: center;
-    
+}
+
+.items {
+    margin: auto;
+}
+
+.items p {
+    display: inline;
+}
+
+.code {
+    margin: 0 1em 0 1em;
 }
 
 

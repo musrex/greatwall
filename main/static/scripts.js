@@ -41,21 +41,21 @@ function Header({ title }) {
 );
     }
 
-function Menu({category}) {
+/* function Menu({category}) {
     return (
         <div>
             <h2>{category}</h2>
 
         </div>
     );
-}
+} */
 
 
 
 
 
 ReactDOM.render(<Header title="Great Wall" />, header)
-ReactDOM.render(<Menu category="Luncheon Special" />, menu)
+/* ReactDOM.render(<Menu category="Luncheon Special" />, menu) */
 
 
 function leftPad(str, len, ch){

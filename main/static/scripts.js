@@ -1,20 +1,14 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     const add_item = document.getElementById('add_item');
+    const container = document.getElementById('input_container');
 
-    function addItem(htmlStr) {
-        let frag = document.createDocumentFragment(),
-            temp = document.createElement('div');
-        temp.innerHTML = htmlStr;
-        while (temp.firstChild) {
-            frag.appendChild(temp.firstChild);
+    function addItem(){
+        let input = document.createElement('input');
+        input.placeholder = 'Test';
+        container.appendChild(input);
         }
-        return frag;
-    };
-
-    let fragment = addItem(
-    '<label for="code">Code</label><input name="code" required /><label for="dish">Name</label><input name="dish" required /><label for="price">Price</label><input name="price" required />');
     
-    add_item.addEventListener("click", document.body.insertAdjacentElement(fragment, document.body.childNodes[8]));
+    add_item.addEventListener("click", addItem);
 });
 
 function leftPad(str, len, ch){

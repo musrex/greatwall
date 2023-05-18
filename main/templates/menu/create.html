@@ -2,7 +2,7 @@
 
 {% block content %}
 <main class="menu">
-<div class="boxes">
+<article class="boxes">
     <h1>Menu Maker</h1>
     <form id="maker" method="post">
         <label for="category">Menu Title</label>
@@ -11,16 +11,32 @@
             {% for menu in menus %}
             <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
             {% endfor %}
-        <label for="code">Code</label>
-        <input name="code" required />
-        <label for="dish">Name</label>
-        <input name="dish" required />
-        <label for="price">Price</label>
-        <input name="price" required />
-    <input type="submit" value="save"/>
-    </form>
-    <button id="add_item" type="button">Add Menu Item</button>
-    <script src="{{ url_for('static', filename='scripts.js') }}" type="text/jsx"></script>   
-    </div>
+            <label for="code">Code</label>
+            <input name="code" required />
+            <label for="dish">Name</label>
+            <input name="dish" required />
+            <label for="price">Price</label>
+            <input name="price" required />
+        <div id="item_container">
+
+        </div>
+
+        <input type="submit" value="save"/>
+        </form>
+        <button id="add_item">Add Menu Item</button>
+</article>
+    <script>
+        const add_item = document.getElementById('add_item');
+        const container = document.getElementById('item_container');
+            
+            function addItem(){
+                let input = document.createElement('input');
+                input.placeholder = 'Test';
+                container.appendChild(input);
+                }
+            
+            add_item.addEventListener("click", addItem);
+        </script>
+
 </main>
 {% endblock %}

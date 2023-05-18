@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const container = document.getElementById('input_container');
 
     function addItem(){
+        // Container needs to be empty for this to work
         let input = document.createElement('input');
         input.placeholder = 'Test';
         container.appendChild(input);

@@ -3,7 +3,7 @@
 {% block content %}
 <header id="header">
 </header>
-
+<div class="horizontal-wrapper">
 <main class="menu">
     {% for menu in menus %}
     <div class="boxes">
@@ -21,9 +21,9 @@
     </div>
     {% endfor %}
 </main>
-
+</div>
 {% if g.user %} 
-<p><a href="{{ url_for('admin.create') }}">Manage Menu's</a></p>
+<p id="manager-link"><a href="{{ url_for('admin.create') }}">Menu Manager</a></p>
 {% endif %}
 
 {% endblock %}

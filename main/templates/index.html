@@ -4,25 +4,25 @@
 <header id="header">
 </header>
 <div class="horizontal-wrapper">
-<main class="menu">
-    {% for menu in menus %}
-    <div class="boxes">
-    <h2>{{ menu['category'] }}</h2>
-        
-                {% for item in items %}
-                <article class="items">
-                    {% if menu['category'] == item['category'] %}
-                        <p class="code">{{ item['code'] }}</p>
-                        <p class="dish">{{ item['dish'] }}</p>
-                        <p class="price">{{ item['price'] }}</p>
-                    {% endif %}
-                </article>
-                {% endfor %}
-    </div>
-    {% endfor %}
-</main>
+    <main class="menu">
+        {% for menu in menus %}
+        <div class="boxes">
+            <h2>{{ menu['category'] }}</h2>
+
+            {% for item in items %}
+            <article class="items">
+                {% if menu['category'] == item['category'] %}
+                <p class="code">{{ item['code'] }}</p>
+                <p class="dish">{{ item['dish'] }}</p>
+                <p class="price">{{ item['price'] }}</p>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </main>
 </div>
-{% if g.user %} 
+{% if g.user %}
 <p id="manager-link"><a href="{{ url_for('admin.create') }}">Menu Manager</a></p>
 {% endif %}
 

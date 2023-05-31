@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="auth">
-<h2>Log in</h2>
-<p>Please enter your username and password to log in.</p>
-<form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <input type="submit" value="login">
-</form>
+<div class="horizontal-wrapper">
+    <div class="menu">
+        <h2>Log in</h2>
+        <p>Please enter your username and password to log in.</p>
+        <form method="post">
+            <label for="username">Username</label>
+            <input name="username" id="username" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required>
+            <input type="submit" value="login">
+        </form>
+    </div>
 </div>
-{% endblock %}
+    {% endblock %}

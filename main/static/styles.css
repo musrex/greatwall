@@ -7,14 +7,13 @@ html {
     background-color: var(--main-bg-color);
     font-family: sans-serif;
     height: 100vh;
-    width: auto;
 }
 
 body {
     font-size: 100%;
-    display: flex;
-    flex-direction: column;
     margin: .5em;
+    display: flex;
+    flex-direction: row;
 }
 
 /****** GREAT WALL HEADER ******
@@ -124,6 +123,8 @@ address {
 }
 
 .menu {
+    display: flex;
+    flex-flow: row wrap;
     transform: rotate(90deg);
     transform-origin: right top;
 }
@@ -132,7 +133,7 @@ address {
     margin: 1em;
     background-color: var(--main-element-color);
     width: 20em;
-    padding: .25em;
+    padding: 1em;
 }
 
 .boxes h2{

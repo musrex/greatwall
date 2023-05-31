@@ -2,43 +2,43 @@
 
 {% block content %}
 <div class="horizontal-wrapper">
-<main class="menu">
-<article class="boxes">
-    <h1>Menu Maker</h1>
-    <form id="maker" method="post">
-        <label for="category">Menu Title</label>
-        <input name="category" id="category" />
-        <select name="existing_category" id="existing_category">
-            {% for menu in menus %}
-            <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
-            {% endfor %}
-            <label for="code">Code</label>
-            <input name="code" required />
-            <label for="dish">Name</label>
-            <input name="dish" required />
-            <label for="price">Price</label>
-            <input name="price" required />
-        <div id="item_container">
+    <main class="menu">
+        <article class="boxes">
+            <h1>Menu Maker</h1>
+            <form id="maker" method="post">
+                <label for="category">Menu Title</label>
+                <input name="category" id="category" />
+                <select name="existing_category" id="existing_category">
+                    {% for menu in menus %}
+                    <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
+                    {% endfor %}
+                    <label for="code">Code</label>
+                    <input name="code" required />
+                    <label for="dish">Name</label>
+                    <input name="dish" required />
+                    <label for="price">Price</label>
+                    <input name="price" required />
+                    <div id="item_container">
 
-        </div>
+                    </div>
 
-        <input type="submit" value="save"/>
-        </form>
-        <button id="add_item">Add Menu Item</button>
-</article>
-    <script>
-        const add_item = document.getElementById('add_item');
-        const container = document.getElementById('item_container');
-            
-            function addItem(){
+                    <input type="submit" value="save" />
+            </form>
+            <button id="add_item">Add Menu Item</button>
+        </article>
+        <script>
+            const add_item = document.getElementById('add_item');
+            const container = document.getElementById('item_container');
+
+            function addItem() {
                 let input = document.createElement('input');
                 input.placeholder = 'Test';
                 container.appendChild(input);
-                }
-            
+            }
+
             add_item.addEventListener("click", addItem);
         </script>
 
-</main>
+    </main>
 </div>
 {% endblock %}

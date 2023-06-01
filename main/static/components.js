@@ -40,4 +40,31 @@ function Header() {
 );
     };
 
+function MenuMaker() {
+    return (
+        <article class="boxes">
+        <h1>Menu Maker</h1>
+        <form id="maker" method="post">
+            <label for="category">Menu Title</label>
+            <input name="category" id="category" />
+            
+                
+                
+                
+                <label for="code">Code</label>
+                <input name="code" required />
+                <label for="dish">Name</label>
+                <input name="dish" required />
+                <label for="price">Price</label>
+                <input name="price" required />
+                <div id="item_container">
+
+                </div>
+
+                <input type="submit" value="save" />
+        </form>
+        </article>
+    );
+};
+
 ReactDOM.render(<Header/>, header);

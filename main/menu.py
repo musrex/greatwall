@@ -25,9 +25,12 @@ def create():
     db = get_db()
     # this is to populate the 'categories' drop down menu
     menus = db.execute(
-    'SELECT * FROM menu ORDER BY category ASC'
+        'SELECT * FROM menu ORDER BY category ASC'
     ).fetchall()
-    
+    items = db.execute(
+        'SELECT * FROM item'
+    ).fetchall()
+      
     if request.method == 'POST':
         category  = (request.form['category']) or (request.form['existing_category'])
         code = request.form['code']
@@ -69,4 +72,4 @@ def create():
         
 
 
-    return render_template('menu/create.html', menus=menus)
+    return render_template('menu/create.html', menus=menus, items=items)

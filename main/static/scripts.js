@@ -17,3 +17,6 @@ function leftPad(str, len, ch){
     ch).join("") + str
 
 };
+
+fetch('instance/greatwall.sqlite')
+    .then(res => console.log(res))

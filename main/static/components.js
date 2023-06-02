@@ -1,6 +1,7 @@
 // Select the div element with 'app' id
 const header = document.getElementById('header');
-            
+const menu = document.getElementById('menu');
+
 function Header() {
     return (
         <div>
@@ -41,6 +42,7 @@ function Header() {
     };
 
 function MenuMaker() {
+    console.log("Hi! :)");
     return (
         <article class="boxes">
         <h1>Menu Maker</h1>

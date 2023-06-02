@@ -25,7 +25,16 @@
                     <input type="submit" value="save" />
             </form>
             <button id="add_item">Add Menu Item</button>
+            <h1>Editor</h1>
+                {% for item in items %} 
+                    {% for menu in menus %}
+                        {% if item['category'] == menu['category'] %}
+                            <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
         </article>
+        
         <script>
             const add_item = document.getElementById('add_item');
             const container = document.getElementById('item_container');

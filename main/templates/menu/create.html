@@ -22,17 +22,20 @@
 
                     </div>
 
-                    <input type="submit" value="save" />
+                    <input type="submit" name="save" value="save" />
             </form>
             <button id="add_item">Add Menu Item</button>
-            <h1>Editor</h1>
+            <h1>Menu Editor</h1>
+                <form id="editor" method="post">
                 {% for item in items %} 
                     {% for menu in menus %}
                         {% if item['category'] == menu['category'] %}
-                            <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
+                        <input type="checkbox" name="{{ item['id'] }}">
+                        <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
+                </form>
         </article>
         
         <script>

@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 
 from main.auth import login_required
 from main.auth import get_db
+from forms import createMenu, deleteItems
 
 bp = Blueprint('admin',__name__)
 
@@ -32,43 +33,45 @@ def create():
     ).fetchall()
       
     if request.method == 'POST':
-        category  = (request.form['category']) or (request.form['existing_category'])
-        code = request.form['code']
-        dish = request.form['dish']
-        price = request.form['price']
-        error = None
+        if request.form['maker']:
 
-        if not category:
-            error = 'Category is required.'
-        if not code:
-            error = 'Code is required.'
-        if not dish:
-            error = 'Name is required.'
-        if not price:
-            error = 'Price is required.'
+            category  = (request.form['category']) or (request.form['existing_category'])
+            code = request.form['code']
+            dish = request.form['dish']
+            price = request.form['price']
+            error = None
 
-        if error is not None:
-            flash(error)
-        else:
-            # this is to check if the 'category' input is already in the
-            # db, if not we add it
-            query = db.execute(
-                'SELECT * FROM menu WHERE category = ?', (category,)
-            ).fetchone()
-            if query is None:
+            if not category:
+                error = 'Category is required.'
+            if not code:
+                error = 'Code is required.'
+            if not dish:
+                error = 'Name is required.'
+            if not price:
+                error = 'Price is required.'
+
+            if error is not None:
+                flash(error)
+            else:
+                # this is to check if the 'category' input is already in the
+                # db, if not we add it
+                query = db.execute(
+                    'SELECT * FROM menu WHERE category = ?', (category,)
+                ).fetchone()
+                if query is None:
+                    db.execute(
+                    'INSERT INTO menu (category) VALUES (?)',
+                    (category,),
+                ) 
+
+                # this is to record the values for the new entry
                 db.execute(
-                'INSERT INTO menu (category) VALUES (?)',
-                (category,),
-            ) 
-
-            # this is to record the values for the new entry
-            db.execute(
-                'INSERT INTO item (category, code, dish, price, author_id)'
-                ' VALUES (?, ?, ?, ?, ?)',
-                (category, code, dish, price, g.user['id']),
-            )
-            db.commit()
-            return redirect(url_for('index'))
+                    'INSERT INTO item (category, code, dish, price, author_id)'
+                    ' VALUES (?, ?, ?, ?, ?)',
+                    (category, code, dish, price, g.user['id']),
+                )
+                db.commit()
+                return redirect(url_for('index'))
         
 
 

@@ -5,15 +5,17 @@
 
 html {
     font-family: sans-serif;
-    height: auto;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 body {
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(27,27,27,1) 15%, rgba(255,237,209,1) 100%);
     font-size: 100%;
-    margin: .5em;
     display: flex;
-    height: 100vh;
+    height: 100%;
+    margin: 0;
+    overflow-y: scroll;
 }
 
 header, .boxes {
@@ -46,12 +48,13 @@ header, .boxes {
 
 #header {
     margin: 1em;
-    grid-column-start:1;
+    /*grid-column-start:1;
     grid-column-end: 2;
-    grid-row-start: 1;
+    grid-row-start: 1;*/
     text-align: center;
     background-color: var(--main-element-color);
     width: 20em;
+    height: fit-content;
     padding: 1em;
 }
 
@@ -211,7 +214,8 @@ address {
     color: red;
     text-transform: uppercase;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
+    right: 0;
     padding: .5em;
     background-color: var(--main-element-color);
     box-shadow: 0px 5px 3px rgb(112, 110, 129, 0.5);

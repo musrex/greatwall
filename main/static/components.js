@@ -1,3 +1,48 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const MenuItemForm = () => {
+    const [item, setItem] = useState({
+        author_id: '',
+        category: '',
+        code: '',
+        dish: '',
+        price: '',
+    });
+
+const handleChange = (e) => {
+    setItem({
+        ...item,
+        [e.target.name]: e.target.value
+    });
+};
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('/api/menu/', item)
+        .then(response => {
+            // handle success
+            console.log(response);
+        })
+        .catch(error => {
+            // handle error
+            console.log(error);
+        });
+    };
+
+return (
+    <form onSubmit={handeSubmit}>
+        <input type="text" name="author_id" value={item.author_id} onChange={handleChange} placeholder='Author ID'/>
+        <input type="text" name="category" value={item.category} onChange={handleChange} placeholder='Category'/>
+        <input type="text" name="code" value={item.code} onChange={handleChange} placeholder='Code'/>
+        <input type="text" name="dish" value={item.dish} onChange={handleChange} placeholder='Dish'/>
+        <input type="text" name="price" value={item.price} onChange={handleChange} placeholder='Price'/>
+        <button type="submit">Submit</button>
+        
+    </form>
+)
+
+
 // Select the div element with 'app' id
 const header = document.getElementById('header');
 const menu = document.getElementById('menu');

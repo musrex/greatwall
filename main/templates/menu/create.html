@@ -4,8 +4,8 @@
 <div class="horizontal-wrapper">
     <main class="menu">
         <article class="boxes">
-            <h1>Menu Maker</h1>
-            <form id="maker" method="post">
+            <h1>Create:</h1>
+            <form id="create" method="post">
                 <label for="category">Menu Title</label>
                 <input name="category" id="category" />
                 <select name="existing_category" id="existing_category">
@@ -25,16 +25,17 @@
                     <input type="submit" name="save" value="save" />
             </form>
             <button id="add_item">Add Menu Item</button>
-            <h1>Menu Editor</h1>
-                <form id="editor" method="post">
+            <h1>Delete:</h1>
+                <form id="delete" method="post">
                 {% for item in items %} 
                     {% for menu in menus %}
                         {% if item['category'] == menu['category'] %}
-                        <input type="checkbox" name="{{ item['id'] }}">
+                        <input type="checkbox" name="items_to_delete" name="{{ item['id'] }}">
                         <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
+                <input type="submit" name="delete" value="delete" />
                 </form>
         </article>
         

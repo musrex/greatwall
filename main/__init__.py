@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask
 from flask import(
     Blueprint, render_template, url_for
@@ -11,6 +12,8 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'greatwall.sqlite')
     )
+
+    logger = logging.getLogger(__name__)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -34,5 +37,11 @@ def create_app(test_config=None):
     from . import menu
     app.register_blueprint(menu.bp)
     app.add_url_rule('/', endpoint='index')
+
+    @app.errorhandler(400)
+    def bad_request(error):
+        # log the error
+        logger.error(f'Bad Request: {error}')
+        return render_template('400.html'), 400
     
     return app

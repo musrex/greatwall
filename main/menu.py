@@ -33,7 +33,7 @@ def create():
     ).fetchall()
       
     if request.method == 'POST':
-        if request.form['maker']:
+        if request.form.get('create'):
 
             category  = (request.form['category']) or (request.form['existing_category'])
             code = request.form['code']
@@ -72,6 +72,18 @@ def create():
                 )
                 db.commit()
                 return redirect(url_for('index'))
+            
+        if request.form.getlist('items_to_delete'):
+            
+            items_to_delete = request.form.getlist('items_to_delete')
+            
+            for item_id in items_to_delete:
+                db.execute(
+                    'DELETE FROM item WHERE id = ?', (item_id,)
+                )
+            db.commit()
+            
+            return redirect(url_for('index'))
         
 
 

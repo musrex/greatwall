@@ -25,18 +25,37 @@
                     <input type="submit" name="save" value="save" />
             </form>
             <button id="add_item">Add Menu Item</button>
+
             <h1>Delete:</h1>
-                <form id="delete" method="post">
+            <form id="delete" method="post">
                 {% for item in items %} 
                     {% for menu in menus %}
                         {% if item['category'] == menu['category'] %}
-                        <input type="checkbox" name="items_to_delete" name="{{ item['id'] }}">
+                        <input type="checkbox" name="items_to_delete" value="{{ item['id'] }}">
                         <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
                 <input type="submit" name="delete" value="delete" />
-                </form>
+            </form>
+
+            <h1>Edit:</h1>
+            <form id="edit" method="post">
+                {% for item in items %} 
+                <div>
+                    <input type="hidden" name="items_to_update" value="{{ item['id'] }},{{ item['code'] }},{{ item['category'] }},{{ item['dish'] }},{{ item['price'] }}">
+                    <label for="category">Menu Title</label>
+                    <input name="category" id="category" value="{{ item['category'] }}" />
+                    <label for="code">Code</label>
+                    <input name="code" id="code" value="{{ item['code'] }}" />
+                    <label for="dish">Name</label>
+                    <input name="dish" id="dish" value="{{ item['dish'] }}" />
+                    <label for="price">Price</label>
+                    <input name="price" id="price" value="{{ item['price'] }}" />
+                </div>
+                {% endfor %}
+            <input type="submit" name="save" value="save" />
+            </form>
         </article>
         
         <script>

@@ -33,7 +33,7 @@ def create():
     ).fetchall()
       
     if request.method == 'POST':
-        if request.form.get('create'):
+        if request.form.get('save'):
 
             category  = (request.form['category']) or (request.form['existing_category'])
             code = request.form['code']

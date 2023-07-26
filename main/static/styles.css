@@ -143,10 +143,25 @@ address {
 
 .content-area {
     margin: 1em;
+    padding: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--main-element-color);
+
+    /* Center the element horizontally and vertically */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Set the size of the element */
+    width: 80%; /* Adjust the width as per your requirement */
+    max-width: 600px; /* Set a maximum width to prevent the element from becoming too large */
+}
+
+#create-tab #delete-tab #edit-tab {
+    margin: 1em;
 }
 
 
@@ -155,6 +170,10 @@ address {
     flex-direction: row;
     flex-wrap: wrap;
     height: fit-content;
+}
+
+.existing_category {
+    display: none;
 }
 
 .boxes {
@@ -171,6 +190,10 @@ address {
     padding: 1em;
     display: flex;
     flex-direction: column;
+}
+
+.editor-menu {
+    display: block;
 }
 
 .boxes h2{
@@ -215,11 +238,15 @@ address {
     justify-content: space-between;  /* add some space between the items */
 }
 
+#buttons p {
+    margin: 1em;
+    font-weight: bolder;
+    font-size: x-large;
+}
+
 #buttons .tab {
     transition: color 0.5s ease;  /* animate color changes */
     color: #bbbbbb;  /* initial text color */
-    padding: 0;
-    margin: 0;
     cursor: pointer;  /* change cursor to pointer on hover */
 }
 

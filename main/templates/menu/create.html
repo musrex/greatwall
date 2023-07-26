@@ -7,14 +7,21 @@
     <main class="editor-menu">
         <div class="content-area">
             <nav id='buttons'> 
-                <h1 id='btn1' class="tab tab-active">Create</h1>
-                <h1 id='btn2' class="tab">Delete</h1> 
-                <h1 id='btn3' class="tab">Edit</h1> 
+                <p id='btn1' class="tab tab-active">Create</p>
+                <p id='btn2' class="tab">Delete</p> 
+                <p id='btn3' class="tab">Edit</p> 
             </nav>
             
         <article class="editor-boxes" id="create-tab">
             <h1 id="heading-tab"></h1>
             <form id="create" method="post">
+                <fieldset>
+                    <legend>New or Existing Category?</legend>
+                    <input type="checkbox" name="new_category_toggle" id="new_category_toggle" checked>
+                    <label for="new_category_toggle">New</label>
+                    <input type="checkbox" name="existing_category_toggle" id="existing_category_toggle" />
+                    <label for="existing_category_toggle">Existing</label>
+                </fieldset>                
                 <label for="category">Menu Title</label>
                 <input name="category" id="category" />
                 <select name="existing_category" id="existing_category">
@@ -22,15 +29,15 @@
                     <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
                     {% endfor %}
                 </select>
-                    <label for="code">Code</label>
-                    <input name="code" required />
-                    <label for="dish">Name</label>
-                    <input name="dish" required />
-                    <label for="price">Price</label>
-                    <input name="price" required />
-                    <div id="item_container">
-                    </div>
-                    <input type="submit" name="save" value="save" />
+                <label for="code">Code</label>
+                <input name="code" required />
+                <label for="dish">Name</label>
+                <input name="dish" required />
+                <label for="price">Price</label>
+                <input name="price" required />
+                <div id="item_container">
+                </div>
+                <input type="submit" name="save" value="save" />
             </form>
 
             <button id="add_item">Add Menu Item</button>

@@ -1,7 +1,26 @@
 document.addEventListener('DOMContentLoaded', (event) => {
+    const newCategoryToggle = document.getElementById('new_category_toggle');
+    const existingCategoryToggle = document.getElementById('existing_category_toggle');
+    let newTab = document.getElementById('category');
+    let existingTab = document.getElementById('existing_category')
+
+    function toggleCategory(event) {
+        if (event.target.id === 'new_category_toggle') {
+            existingTab.style.display = 'block';
+            newTab.style.display = 'none';
+            existingCategoryToggle.checked = false;
+        } else if ( event.target.id === 'existing_category_toggle') {
+            existingTab.style.display = 'none';
+            newTab.style.display = 'block';
+            newCategoryToggle.checked = false;
+        }
+    }
+
+    newCategoryToggle.addEventListener('change', toggleCategory);
+    existingCategoryToggle.addEventListener('change', toggleCategory);
+    
     const add_item = document.getElementById('add_item');
     const container = document.getElementById('input_container');
-
 
     function addItem(){
         // Container needs to be empty for this to work

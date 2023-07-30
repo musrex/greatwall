@@ -8,9 +8,10 @@ from flask import(
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+    instance_path = 'main'
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'greatwall.sqlite')
+        DATABASE = os.path.join(instance_path, 'greatwall.sqlite')
     )
 
     logger = logging.getLogger(__name__)

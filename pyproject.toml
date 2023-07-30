@@ -1,0 +1,11 @@
+[project]
+name = "greatwall"
+version = "0.9.0"
+description = "A simple menu website, with a menu editor, for restaurants."
+dependencies = [
+    "flask",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"

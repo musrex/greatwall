@@ -15,12 +15,12 @@
         <article class="editor-boxes" id="create-tab">
             <h1 id="heading-tab"></h1>
             <form id="create" method="post">
-                <fieldset>
+                <fieldset id="new_or_existing">
                     <legend>New or Existing Category?</legend>
-                    <input type="checkbox" name="new_category_toggle" id="new_category_toggle" checked>
                     <label for="new_category_toggle">New</label>
-                    <input type="checkbox" name="existing_category_toggle" id="existing_category_toggle" />
+                    <input type="checkbox" name="new_category_toggle" id="new_category_toggle" checked>
                     <label for="existing_category_toggle">Existing</label>
+                    <input type="checkbox" name="existing_category_toggle" id="existing_category_toggle" />
                 </fieldset>                
                 <label for="category">Menu Title</label>
                 <input name="category" id="category" />

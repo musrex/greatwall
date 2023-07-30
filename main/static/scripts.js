@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     function toggleCategory(event) {
         if (event.target.id === 'new_category_toggle') {
-            existingTab.style.display = 'block';
-            newTab.style.display = 'none';
-            existingCategoryToggle.checked = false;
-        } else if ( event.target.id === 'existing_category_toggle') {
             existingTab.style.display = 'none';
             newTab.style.display = 'block';
+            existingCategoryToggle.checked = false;
+        } else if ( event.target.id === 'existing_category_toggle') {
+            existingTab.style.display = 'block';
+            newTab.style.display = 'none';
             newCategoryToggle.checked = false;
         }
     }

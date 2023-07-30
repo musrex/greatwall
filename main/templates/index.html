@@ -3,23 +3,34 @@
 {% block content %}
 <header id="header">
 </header>
-    <main class="menu">
-        {% for menu in menus %}
-        <div class="boxes">
-            <h2>{{ menu['category'] }}</h2>
-
-            {% for item in items %}
-            <article class="items">
-                {% if menu['category'] == item['category'] %}
-                <p class="code">{{ item['code'] }}</p>
-                <p class="dish">{{ item['dish'] }}</p>
-                <p class="price">{{ item['price'] }}</p>
-                {% endif %}
-            </article>
-            {% endfor %}
-        </div>
+<main class="menu">
+    {% set categories_with_items = [] %}
+    {% for menu in menus %}
+        {% for item in items %}
+            {% if menu['category'] == item['category'] %}
+                {% set categories_with_items = categories_with_items.append(menu['category']) %}
+            {% endif %}
         {% endfor %}
-    </main>
+    {% endfor %}
+
+    {% for menu in menus %}
+        {% if menu['category'] in categories_with_items %}
+            <div class="boxes">
+                <h2>{{ menu['category'] }}</h2>
+                {% for item in items %}
+                    {% if menu['category'] == item['category'] %}
+                        <article class="items">
+                            <p class="code">{{ item['code'] }}</p>
+                            <p class="dish">{{ item['dish'] }}</p>
+                            <p class="price">{{ item['price'] }}</p>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+</main>
+
 {% if g.user %}
 <p id="manager-link"><a href="{{ url_for('admin.create') }}">Menu Manager</a></p>
 {% endif %}

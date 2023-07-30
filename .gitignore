@@ -7,3 +7,6 @@ instance/
 
 scratchpad.md
 main/__pycache__/menu.cpython-38.pyc
+
+main.egg-info/
+main/greatwall.sqlite

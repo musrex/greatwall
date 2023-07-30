@@ -164,7 +164,6 @@ address {
     margin: 1em;
 }
 
-
 .menu {
     display: flex;
     flex-direction: row;
@@ -185,11 +184,43 @@ address {
 
 .editor-boxes {
     background-color: var(--main-element-color);
-    width: 20em;
     height: fit-content;
     padding: 1em;
+    display: block;
+}
+
+/* This is used to select all form elements in the articles. */
+article.editor-boxes form {
     display: flex;
     flex-direction: column;
+}
+
+#create > fieldset {
+    width: 5em;
+    text-align: left;
+}
+
+/* This is used to position the labels on top of the inputs. */
+article.editor-boxes label {
+    order: -1;
+}
+
+/* This will style all input and select elements to take up the full width of the form. */
+article.editor-boxes input,
+article.editor-boxes select {
+    width: 100%;
+}
+
+/* This will add a little bit of space between each form control for better readability. */
+article.editor-boxes label,
+article.editor-boxes input,
+article.editor-boxes select {
+    margin-bottom: 10px;
+}
+
+#create {
+    display: block;
+    width: fit-content;
 }
 
 .editor-menu {

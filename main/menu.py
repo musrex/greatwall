@@ -6,8 +6,22 @@ from werkzeug.exceptions import abort
 from main.auth import login_required
 from main.auth import get_db
 
+import csv
+import os
 
 bp = Blueprint('admin',__name__)
+
+def import_CSV(db, file):
+    with open(file, 'r') as csv_file:
+        reader = csv.reader(csv_file)
+        for row in reader:
+            menu = row[0]
+            code = row[1]
+            dish = row[2]
+            price = row[3]
+            notes = row[4]
+            spicy = row[5]
+            db.execute()
 
 def get_all_menus(db):
     return db.execute('SELECT * FROM menu ORDER BY category ASC').fetchall()

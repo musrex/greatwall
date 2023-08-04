@@ -199,9 +199,14 @@ form#edit {
 #create > fieldset {
     width: auto;
     text-align: left;
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
     margin-bottom: 1em;
+}
+
+input[type="checkbox"],
+label {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .toggle {

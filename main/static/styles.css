@@ -15,7 +15,7 @@ body {
     display: flex;
     height: 100%;
     margin: 0;
-    overflow-y: scroll;
+    /*overflow-y: scroll;*/
 }
 
 header, .boxes {
@@ -142,22 +142,15 @@ address {
 ********************************/
 
 .content-area {
-    margin: 1em;
+    margin: 1em 50% 1em 50%;
     padding: 1em;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
     background-color: var(--main-element-color);
 
-    /* Center the element horizontally and vertically */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     /* Set the size of the element */
-    width: 80%; /* Adjust the width as per your requirement */
-    max-width: 600px; /* Set a maximum width to prevent the element from becoming too large */
+    width: 100%; /* Adjust the width as per your requirement */
 }
 
 #create-tab #delete-tab #edit-tab {
@@ -175,7 +168,7 @@ address {
     display: none;
 }
 
-.boxes {
+.cards {
     margin: 1em;
     background-color: var(--main-element-color);
     width: 20em;
@@ -195,9 +188,43 @@ article.editor-boxes form {
     flex-direction: column;
 }
 
+form#create,
+form#delete,
+form#edit {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
+
 #create > fieldset {
-    width: 5em;
+    width: auto;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.toggle {
+    padding: 0;
+    margin: 1em;
+    width: 2em;
+}
+
+
+
+#category,
+#existing_category,
+#item_container,
+#add_item {
+    margin-bottom: 1em;
+}
+
+[name="code"],
+[name="dish"],
+[name="price"],
+[name="save"] {
+    margin-bottom: 1em;
+
 }
 
 /* This is used to position the labels on top of the inputs. */
@@ -227,7 +254,7 @@ article.editor-boxes select {
     display: block;
 }
 
-.boxes h2{
+.cards h2{
     text-align: center;
 }
 

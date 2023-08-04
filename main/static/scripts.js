@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     existingCategoryToggle.addEventListener('change', toggleCategory);
     
     const add_item = document.getElementById('add_item');
-    const container = document.getElementById('input_container');
+    const container = document.getElementById('item_container');
 
     function addItem(){
         // Container needs to be empty for this to work

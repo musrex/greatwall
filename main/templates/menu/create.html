@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="horizontal-wrapper">
+
 
     
     <main class="editor-menu">
@@ -12,18 +12,20 @@
                 <p id='btn3' class="tab">Edit</p> 
             </nav>
             
-        <article class="editor-boxes" id="create-tab">
+        <article class="cards" id="create-tab">
             <h1 id="heading-tab"></h1>
             <form id="create" method="post">
                 <fieldset id="new_or_existing">
                     <legend>New or Existing Category?</legend>
                     <label for="new_category_toggle">New</label>
-                    <input type="checkbox" name="new_category_toggle" id="new_category_toggle" checked>
+                    <input type="checkbox" name="new_category_toggle" class="toggle" id="new_category_toggle" checked>
                     <label for="existing_category_toggle">Existing</label>
-                    <input type="checkbox" name="existing_category_toggle" id="existing_category_toggle" />
+                    <input type="checkbox" name="existing_category_toggle" class="toggle" id="existing_category_toggle" />
                 </fieldset>                
                 <label for="category">Menu Title</label>
                 <input name="category" id="category" />
+                <label for="special">Specials Menu?</label>
+                <input type="checkbox" name="special">
                 <select name="existing_category" id="existing_category">
                     {% for menu in menus %}
                     <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
@@ -35,14 +37,17 @@
                 <input name="dish" required />
                 <label for="price">Price</label>
                 <input name="price" required />
+                <label for="spicy">Spicy?</label>
+                <input type="checkbox" name="spicy"/>
+                </fieldset>                
                 <div id="item_container">
                 </div>
                 <input type="submit" name="save" value="save" />
             </form>
-
             <button id="add_item">Add Menu Item</button>
         </article>
-        <article class="editor-boxes" id="delete-tab">
+
+        <article class="cards" id="delete-tab">
             <h1 id="heading-tab"></h1>
             <form id="delete" method="post">
                 {% for item in items %} 
@@ -56,11 +61,11 @@
                 <input type="submit" name="delete" value="delete" />
             </form>
         </article>
-        <article class="editor-boxes" id="edit-tab">
+
+        <article class="cards" id="edit-tab">
             <h1 id="heading-tab"></h1>
             <form id="edit" method="post">
                 {% for item in items %} 
-                <div>
                     <input type="hidden" name="items_to_update" value="{{ item['id'] }},{{ item['code'] }},{{ item['category'] }},{{ item['dish'] }},{{ item['price'] }}">
                     <label for="category">Menu Title</label>
                     <input name="category" id="category" value="{{ item['category'] }}" />
@@ -70,7 +75,6 @@
                     <input name="dish" id="dish" value="{{ item['dish'] }}" />
                     <label for="price">Price</label>
                     <input name="price" id="price" value="{{ item['price'] }}" />
-                </div>
                 {% endfor %}
             <input type="submit" name="save" value="save" />
             </form>
@@ -92,6 +96,6 @@
     </main>
 
 </div>
-</div>
+
 
 {% endblock %}

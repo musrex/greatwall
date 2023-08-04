@@ -15,7 +15,7 @@
 
     {% for menu in menus %}
         {% if menu['category'] in categories_with_items %}
-            <div class="boxes">
+            <div class="{{ 'special' if menu['special]' else 'cards'}}">
                 <h2>{{ menu['category'] }}</h2>
                 {% for item in items %}
                     {% if menu['category'] == item['category'] %}

@@ -12,6 +12,7 @@ CREATE TABLE user (
 CREATE TABLE menu (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     category TEXT NOT NULL
+    special BOOLEAN NOT NULL,
 );
 
 CREATE TABLE item (
@@ -21,6 +22,8 @@ CREATE TABLE item (
     code TEXT UNIQUE NOT NULL,
     dish TEXT UNIQUE NOT NULL,
     price INTEGER NOT NULL,
+    notes TEXT,
+    spicy BOOLEAN NOT NULL,
     FOREIGN KEY (author_id) REFERENCES user (id),
     FOREIGN KEY (category) REFERENCES menu (category)
 );

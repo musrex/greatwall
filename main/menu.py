@@ -9,79 +9,67 @@ from main.auth import get_db
 
 bp = Blueprint('admin',__name__)
 
+def get_all_menus(db):
+    return db.execute('SELECT * FROM menu ORDER BY category ASC').fetchall()
+
+def get_all_items(db):
+    return db.execute('SELECT * FROM item').fetchall()
+
+def validate_form_data(form):
+    fields = ['category', 'code', 'dish', 'price']
+    errors = {field: f'{field.capitalize()} is required.' for field in fields if not form.get(field)}
+    return ', '.join(errors.values()) if errors else None
+
+def save_data(db, form, user_id):
+    category = form.get('category') or form.get('existing_category')
+    save_menu_category(db, category)
+    save_item(db, form, category, user_id)
+
+def save_menu_category(db, form, category):
+    if not db.execute('SELECT * FROM menu WHERE category = ?', (category,)).fetchone():
+        special = True if form.get('special') else False
+        db.execute('INSERT INTO menu (category, special) VALUES (?,?)', (category, special))
+
+def save_item(db, form, category, user_id):
+    spicy = True if form.get('spicy') else False
+    db.execute(
+        'INSERT INTO item (category, code, dish, price, notes, special, spicy, author_id)'
+        ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        (category, form.get('code'), form.get('dish'), form.get('price'), form.get('notes'), spicy, form.get('spicy'), user_id)
+    )
+    db.commit()
+
+def delete_items(db, items_to_delete):
+    for item_id in items_to_delete:
+        db.execute('DELETE FROM item WHERE id = ?', (item_id),)
+    db.commit()
+
 @bp.route('/')
 def index():
     db = get_db()
-    menus = db.execute('SELECT category FROM menu ORDER BY category ASC').fetchall()
-    items = db.execute(
-        'SELECT i.id, category, code, dish, price, author_id'
-        ' FROM item i JOIN user u ON i.author_id = u.id'
-        ' ORDER BY code ASC'
-    ).fetchall()
+    menus = get_all_menus(db)
+    items = get_all_items(db)
     return render_template('index.html', items=items, menus=menus)
+
 
 @bp.route('/create', methods=('GET','POST'))
 @login_required
 def create():
     db = get_db()
     # this is to populate the 'categories' drop down menu
-    menus = db.execute(
-        'SELECT * FROM menu ORDER BY category ASC'
-    ).fetchall()
-    items = db.execute(
-        'SELECT * FROM item'
-    ).fetchall()
-      
+    menus = get_all_menus(db)
+    items = get_all_items(db)
+
     if request.method == 'POST':
-        if request.form.get('save'):
+        error = validate_form_data(request.form)
 
-            category  = (request.form['category']) or (request.form['existing_category'])
-            code = request.form['code']
-            dish = request.form['dish']
-            price = request.form['price']
-            error = None
-
-            if not category:
-                error = 'Category is required.'
-            if not code:
-                error = 'Code is required.'
-            if not dish:
-                error = 'Name is required.'
-            if not price:
-                error = 'Price is required.'
-
-            if error is not None:
-                flash(error)
-            else:
-                # this is to check if the 'category' input is already in the
-                # db, if not we add it
-                query = db.execute(
-                    'SELECT * FROM menu WHERE category = ?', (category,)
-                ).fetchone()
-                if query is None:
-                    db.execute(
-                    'INSERT INTO menu (category) VALUES (?)',
-                    (category,),
-                ) 
-
-                # this is to record the values for the new entry
-                db.execute(
-                    'INSERT INTO item (category, code, dish, price, author_id)'
-                    ' VALUES (?, ?, ?, ?, ?)',
-                    (category, code, dish, price, g.user['id']),
-                )
-                db.commit()
-                return redirect(url_for('index'))
-            
-        if request.form.getlist('items_to_delete'):
-            
-            items_to_delete = request.form.getlist('items_to_delete')
-            
-            for item_id in items_to_delete:
-                db.execute(
-                    'DELETE FROM item WHERE id = ?', (item_id,)
-                )
-            db.commit()
+        if error:
+            flash(error)
+        else:
+            if request.form.get('save'):
+                save_data(db, request.form, g.user['id'])
+            elif request.form.get('items_to_delete'):
+                delete_items(db, request.form.get('items_to_delete'))
             
             return redirect(url_for('index'))
         

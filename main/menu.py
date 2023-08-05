@@ -12,6 +12,9 @@ import os
 bp = Blueprint('admin',__name__)
 
 def import_CSV(db, file):
+    file = request.files['file']
+    if file.filename == '':
+        flash('No file selected')
     with open(file, 'r') as csv_file:
         reader = csv.reader(csv_file)
         for row in reader:
@@ -21,7 +24,11 @@ def import_CSV(db, file):
             price = row[3]
             notes = row[4]
             spicy = row[5]
-            db.execute()
+            db.execute('INSERT INTO menu (category) VALUES (?)', (menu))
+            db.commit()
+            db.commit('INSERT INTO item (category, code, dish, price, notes, special, spicy, author_id)',
+                      ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (menu, code, dish, price, notes, spicy))
+            db.commit()
 
 def get_all_menus(db):
     return db.execute('SELECT * FROM menu ORDER BY category ASC').fetchall()

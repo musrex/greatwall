@@ -11,7 +11,7 @@ def create_app(test_config=None):
     instance_path = 'main'
     app.config.from_mapping(
         SECRET_KEY='dev',
-        DATABASE = os.path.join(instance_path, 'greatwall.sqlite')
+        DATABASE = os.path.join(app.instance_path, 'greatwall.sqlite')
     )
 
     logger = logging.getLogger(__name__)

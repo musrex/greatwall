@@ -45,10 +45,12 @@
                 </div>
                 <input type="submit" name="save" value="save" />
             </form>
-            <form id="import_csv">
-                <input type="file" name="csv_file" id="csv_file" accept=".csv" />
-                <input type="submit" name="import" value="import" />
+
+            <form id="import_csv" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv">
+                <input type="submit" name="import_csv" value="Import CSV">
             </form>
+
             <button id="add_item">Add Menu Item</button>
         </article>
 

@@ -2,33 +2,44 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for
 )
 from werkzeug.exceptions import abort
+from werkzeug.utils import secure_filename
 
 from main.auth import login_required
 from main.auth import get_db
 
 import csv
 import os
+import logging
+
+logging.basicConfig(filename='logfile.log', level=logging.DEBUG)
+
 
 bp = Blueprint('admin',__name__)
 
-def import_CSV(db, file):
-    file = request.files['file']
-    if file.filename == '':
-        flash('No file selected')
-    with open(file, 'r') as csv_file:
+def import_CSV(db, file_path):
+    logging.debug("import_CSV was called.")  # Debugging line
+    with open(file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
+        next(reader)
         for row in reader:
             menu = row[0]
             code = row[1]
             dish = row[2]
-            price = row[3]
+            price = int(row[3])
             notes = row[4]
-            spicy = row[5]
-            db.execute('INSERT INTO menu (category) VALUES (?)', (menu))
-            db.commit()
-            db.commit('INSERT INTO item (category, code, dish, price, notes, special, spicy, author_id)',
-                      ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)', (menu, code, dish, price, notes, spicy))
-            db.commit()
+            spicy = bool(row[5])
+
+            # Debugging lines
+            logging.debug(f"Attempting to insert menu: {menu}, code: {code}, dish: {dish}, price: {price}, notes: {notes}, spicy: {spicy}")
+
+            try:
+                db.execute('INSERT INTO menu (category) VALUES (?)', (menu,))
+                db.execute('INSERT INTO item (category, code, dish, price, notes, spicy, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+                           (menu, code, dish, price, notes, spicy, g.user['id']))
+            except Exception as e:
+                logging.error(f"Failed to insert data into database. Exception: {e}")
+
+        db.commit()
 
 def get_all_menus(db):
     return db.execute('SELECT * FROM menu ORDER BY category ASC').fetchall()
@@ -50,11 +61,12 @@ def save_menu_category(db, form, category):
     if not db.execute('SELECT * FROM menu WHERE category = ?', (category,)).fetchone():
         special = True if form.get('special') else False
         db.execute('INSERT INTO menu (category, special) VALUES (?,?)', (category, special))
+        db.commit()
 
 def save_item(db, form, category, user_id):
     spicy = True if form.get('spicy') else False
     db.execute(
-        'INSERT INTO item (category, code, dish, price, notes, special, spicy, author_id)'
+        'INSERT INTO item (category, code, dish, price, notes, spicy, author_id)'
         ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         (category, form.get('code'), form.get('dish'), form.get('price'), form.get('notes'), spicy, form.get('spicy'), user_id)
     )
@@ -91,7 +103,16 @@ def create():
                 save_data(db, request.form, g.user['id'])
             elif request.form.get('items_to_delete'):
                 delete_items(db, request.form.get('items_to_delete'))
-            
+            elif request.form.get('import_csv'):
+                file = request.files['csv_file']
+                if file.filename == '':
+                    flash('No file selected')
+                else:
+                    file_path = os.path.join('uploads', file)
+                    file.save(file_path)
+                    import_CSV(db, file_path)
+                    return redirect(url_for('index'))
+                
             return redirect(url_for('index'))
         
 

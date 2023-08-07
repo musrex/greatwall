@@ -6,7 +6,7 @@
 html {
     font-family: sans-serif;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     display: flex;
     height: 100%;
     margin: 0;
-    /*overflow-y: scroll;*/
+    overflow-y: scroll;
 }
 
 header, .boxes {
@@ -172,6 +172,7 @@ address {
     margin: 1em;
     background-color: var(--main-element-color);
     width: 20em;
+    height: fit-content;
     padding: 1em;
 }
 

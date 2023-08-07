@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, current_app
 )
 from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
@@ -9,35 +9,29 @@ from main.auth import get_db
 
 import csv
 import os
-import logging
-
-logging.basicConfig(filename='logfile.log', level=logging.DEBUG)
-
 
 bp = Blueprint('admin',__name__)
 
 def import_CSV(db, file_path):
-    logging.debug("import_CSV was called.")  # Debugging line
     with open(file_path, 'r') as csv_file:
         reader = csv.reader(csv_file)
         next(reader)
         for row in reader:
             menu = row[0]
-            code = row[1]
-            dish = row[2]
-            price = int(row[3])
-            notes = row[4]
-            spicy = bool(row[5])
-
-            # Debugging lines
-            logging.debug(f"Attempting to insert menu: {menu}, code: {code}, dish: {dish}, price: {price}, notes: {notes}, spicy: {spicy}")
-
+            code = row[2]
+            dish = row[3]
+            price = row[4]
+            notes = row[5]
+            spicy = bool(row[6])
             try:
-                db.execute('INSERT INTO menu (category) VALUES (?)', (menu,))
+                if not db.execute('SELECT * FROM menu WHERE category = ?', (menu,)).fetchone():
+                    special = True if request.form.get('special') else False
+                    db.execute('INSERT INTO menu (category, special) VALUES (?,?)', (menu, special))
+                    db.commit()
                 db.execute('INSERT INTO item (category, code, dish, price, notes, spicy, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)', 
                            (menu, code, dish, price, notes, spicy, g.user['id']))
-            except Exception as e:
-                logging.error(f"Failed to insert data into database. Exception: {e}")
+            except:
+                flash('Error, something went wrong.')
 
         db.commit()
 
@@ -94,26 +88,29 @@ def create():
     items = get_all_items(db)
 
     if request.method == 'POST':
-        error = validate_form_data(request.form)
 
-        if error:
-            flash(error)
-        else:
-            if request.form.get('save'):
+        if request.form.get('create_item'):    
+            error = validate_form_data(request.form)
+            if error:
+                flash(error)
+            else:
                 save_data(db, request.form, g.user['id'])
-            elif request.form.get('items_to_delete'):
-                delete_items(db, request.form.get('items_to_delete'))
-            elif request.form.get('import_csv'):
-                file = request.files['csv_file']
-                if file.filename == '':
-                    flash('No file selected')
-                else:
-                    file_path = os.path.join('uploads', file)
-                    file.save(file_path)
-                    import_CSV(db, file_path)
-                    return redirect(url_for('index'))
-                
-            return redirect(url_for('index'))
+        
+        elif request.form.get('delete_items'):
+            delete_items(db, request.form.get('items_to_delete'))
+        
+        elif request.form.get('import_csv'):
+            file_object = request.files['file']
+            if file_object.filename == '':
+                flash('No file selected')
+            else:
+                file_name = secure_filename(file_object.filename)
+                file_path = os.path.join(current_app.config['UPLOAD_PATH'], file_name)
+                file_object.save(file_path)
+                import_CSV(db, file_path)
+                return redirect(url_for('index'))
+            
+        return redirect(url_for('index'))
         
 
 

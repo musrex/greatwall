@@ -43,15 +43,16 @@
                 </fieldset>                
                 <div id="item_container">
                 </div>
-                <input type="submit" name="save" value="save" />
+                <input type="submit" name="create_item" value="Save" />
             </form>
-
+            
+            <button id="add_item">Add Menu Item</button>
+            
             <form id="import_csv" method="post" enctype="multipart/form-data">
                 <input type="file" name="file" accept=".csv">
                 <input type="submit" name="import_csv" value="Import CSV">
             </form>
 
-            <button id="add_item">Add Menu Item</button>
         </article>
 
         <article class="cards" id="delete-tab">
@@ -65,7 +66,7 @@
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
-                <input type="submit" name="delete" value="delete" />
+                <input type="submit" name="delete_items" value="Delete" />
             </form>
         </article>
 
@@ -83,7 +84,7 @@
                     <label for="price">Price</label>
                     <input name="price" id="price" value="{{ item['price'] }}" />
                 {% endfor %}
-            <input type="submit" name="save" value="save" />
+            <input type="submit" name="edit_items" value="Save" />
             </form>
         </article>
         

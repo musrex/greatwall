@@ -10,3 +10,11 @@ main/__pycache__/menu.cpython-38.pyc
 
 main.egg-info/
 main/greatwall.sqlite
+
+menu images/
+
+logfile.log
+
+.jpg
+.png
+.svg

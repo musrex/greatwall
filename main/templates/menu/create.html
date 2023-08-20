@@ -88,22 +88,14 @@
             </form>
         </article>
         
-        <script>
-            const add_item = document.getElementById('add_item');
-            const container = document.getElementById('item_container');
-
-            function addItem() {
-                let input = document.createElement('input');
-                input.placeholder = 'Test';
-                container.appendChild(input);
-            }
-
-            add_item.addEventListener("click", addItem);
-        </script>
 
     </main>
 
 </div>
 
+        <script
+        src="{{ url_for('static', filename='scripts/editor.js') }}"
+        type="module">
+        </script>
 
 {% endblock %}

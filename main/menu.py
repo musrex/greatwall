@@ -46,6 +46,7 @@ def validate_form_data(form):
     errors = {field: f'{field.capitalize()} is required.' for field in fields if not form.get(field)}
     return ', '.join(errors.values()) if errors else None
 
+
 def save_data(db, form, user_id):
     category = form.get('category') or form.get('existing_category')
     save_menu_category(db, category)

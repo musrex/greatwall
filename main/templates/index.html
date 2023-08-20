@@ -15,10 +15,10 @@
 
     {% for menu in menus %}
         {% if menu['category'] in categories_with_items %}
-            <div class="{{ 'special' if menu.special else 'cards'}}">
+            <div class="{{ 'special cards' if menu.special else 'cards'}}">
                 <h2>{{ menu['category'] }}</h2>
                 {% for item in items %}
-                    {% if menu['category'] == item['category'] %}
+                    {% if menu['category'] == item['category'] %}   
                         <article class="items">
                             <p class="code">{{ item['code'] }}</p>
                             <p class="dish">{{ item['dish'] }}</p>
@@ -34,5 +34,10 @@
 {% if g.user %}
 <p id="manager-link"><a href="{{ url_for('admin.create') }}">Menu Manager</a></p>
 {% endif %}
+
+<script
+src="{{ url_for('static', filename='scripts/cards.js') }}"
+type="module">
+</script>
 
 {% endblock %}

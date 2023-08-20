@@ -12,7 +12,9 @@ html {
 body {
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(27,27,27,1) 15%, rgba(255,237,209,1) 100%);
     font-size: 100%;
-    display: flex;
+    display: grid;
+    grid-template-rows: 10vw 1fr;;
+    grid-template-columns: 20vw 1fr;
     height: 100%;
     margin: 0;
     overflow-y: scroll;
@@ -47,15 +49,15 @@ header, .boxes {
 ********************************/
 
 #header {
+    position: fixed;
     margin: 1em;
-    /*grid-column-start:1;
-    grid-column-end: 2;
-    grid-row-start: 1;*/
     text-align: center;
     background-color: var(--main-element-color);
-    width: 20em;
+    width: fit-content;
     height: fit-content;
     padding: 1em;
+    grid-column-start: 1;
+    grid-column-end:  2;
 }
 
 #logo {
@@ -141,6 +143,7 @@ address {
 --------------------------------
 ********************************/
 
+/* This is for the admin area editor*/
 .content-area {
     margin: 1em 50% 1em 50%;
     padding: 1em;
@@ -158,6 +161,9 @@ address {
 }
 
 .menu {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    position: relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -169,11 +175,82 @@ address {
 }
 
 .cards {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     margin: 1em;
-    background-color: var(--main-element-color);
-    width: 20em;
-    height: fit-content;
-    padding: 1em;
+    background: linear-gradient(
+        to bottom,
+        #c9c9c9,
+        var(--main-element-color) 5% 85%,
+        #999999);
+    border-radius: 4px 4px 10px 10px;
+    width: 25em;
+    height: 20em;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0px 5px 3px rgb(112, 110, 129, 0.5);
+    cursor: pointer;
+    padding: 0 2em;
+}
+
+.cards h2{
+    text-align: center;
+}
+
+.items{
+    display: flex;
+    border-bottom: #000000 dashed 1px;
+}
+
+.items p{
+    margin: 1em;
+}
+
+p.price{
+    margin-left: auto;
+    text-align: right;
+}
+
+
+/* Define the shake animation */
+@keyframes shake1 {
+    0% { transform: rotate(0deg);}    
+    10% { transform: rotate(-.5deg);}
+    20% { transform: rotate(.5deg);}
+    30% { transform: rotate(-.5deg);}
+    40% { transform: rotate(.5deg);}
+    50% { transform: rotate(-.5deg);}
+    60% { transform: rotate(.5deg);}
+    70% { transform: rotate(-.5deg);}
+    80% { transform: rotate(.5deg);}
+    90% { transform: rotate(-.5deg);}
+    100% { transform: rotate(0deg);}
+}
+
+/* Apply the animation on hover */
+.cards:hover {
+    animation: shake1 0.5s;
+}
+.card-expanded h2{
+    text-align: center;
+}
+.card-expanded{
+    position: absolute;
+    background: linear-gradient(
+        to bottom,
+        #c9c9c9,
+        var(--main-element-color) 5% 85%,
+        #999999);
+    overflow: scroll;
+    z-index: 10;
+    width: 70vw;
+    height: 80vh;
+    margin: 1em;
+    box-shadow: 0em 10em 100em black;
+    transition: all 0.25s ease-in-out;
+    transform: scale(1,1);
+    padding: 0 2em;
 }
 
 .editor-boxes {
@@ -216,8 +293,6 @@ label {
     width: 2em;
 }
 
-
-
 #category,
 #existing_category,
 #item_container,
@@ -258,37 +333,6 @@ article.editor-boxes select {
 
 .editor-menu {
     display: block;
-}
-
-.cards h2{
-    text-align: center;
-}
-
-.items {
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.items p {
-    display: inline;
-    padding-bottom: .25em;
-    border-bottom: 1.5px dashed black;
-}
-
-.code {
-    grid-column-start: 1;
-    margin-left: 1em;
-}
-
-.dish {
-    grid-column-start: 2;
-    margin-left: -3em;
-}
-
-.price {
-    grid-column-start: 3;
-    max-width: max-content;
 }
 
 .menu input, .menu label {
@@ -355,10 +399,13 @@ article.editor-boxes select {
 }
 
 #manager-link a {
+    grid-row-start: 0;
+    grid-row-end: 1;
     color: red;
     text-transform: uppercase;
     position: fixed;
     z-index: 2;
+    top: 1em;
     right: 0;
     padding: .5em;
     background-color: var(--main-element-color);

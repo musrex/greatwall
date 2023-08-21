@@ -20,6 +20,14 @@ function addItem(){
 
 
 function switchTab(event) {
+    let btn0 = document.getElementById("btn1");
+    let btn1 = document.getElementById("btn2");
+    let btn2 = document.getElementById("btn3");
+
+    let createTab = document.getElementById("create-tab");
+    let deleteTab = document.getElementById("delete-tab");
+    let editTab = document.getElementById("edit-tab");
+    
     if (event.target.id === "btn0") {
         createTab.style.display = "block";
         btn0.classList.add("tab-active");

@@ -12,7 +12,7 @@
                 <p id='btn3' class="tab">Edit</p> 
             </nav>
             
-        <article class="cards" id="create-tab">
+        <article class="editor" id="create-tab">
             <h1 id="heading-tab"></h1>
             <form id="create" method="post">
                 <fieldset id="new_or_existing">
@@ -55,7 +55,7 @@
 
         </article>
 
-        <article class="cards" id="delete-tab">
+        <article class="editor" id="delete-tab">
             <h1 id="heading-tab"></h1>
             <form id="delete" method="post">
                 {% for item in items %} 
@@ -70,7 +70,7 @@
             </form>
         </article>
 
-        <article class="cards" id="edit-tab">
+        <article class="editor" id="edit-tab">
             <h1 id="heading-tab"></h1>
             <form id="edit" method="post">
                 {% for item in items %} 

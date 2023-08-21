@@ -1,4 +1,4 @@
-import { toggleCategory, addItem, switchTab } from "./functions";
+import { toggleCategory, addItem, switchTab } from "./functions.js";
 
 // On page load
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -19,15 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     add_item.addEventListener("click", addItem);
 
     // Switch between tabs on the admin page
-    let btn1 = document.getElementById("btn1");
-    let btn2 = document.getElementById("btn2");
-    let btn3 = document.getElementById("btn3");
-
-    let createTab = document.getElementById("create-tab");
-    let deleteTab = document.getElementById("delete-tab");
-    let editTab = document.getElementById("edit-tab");
-
     btn1.addEventListener("click", switchTab);
     btn2.addEventListener("click", switchTab);
     btn3.addEventListener("click", switchTab);
-})
+});

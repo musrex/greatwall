@@ -216,21 +216,12 @@ p.price{
 /* Define the shake animation */
 @keyframes shake1 {
     0% { transform: rotate(0deg);}    
-    10% { transform: rotate(-.5deg);}
-    20% { transform: rotate(.5deg);}
-    30% { transform: rotate(-.5deg);}
-    40% { transform: rotate(.5deg);}
-    50% { transform: rotate(-.5deg);}
-    60% { transform: rotate(.5deg);}
-    70% { transform: rotate(-.5deg);}
-    80% { transform: rotate(.5deg);}
-    90% { transform: rotate(-.5deg);}
-    100% { transform: rotate(0deg);}
+    100% { transform: scale(1.1);}
 }
 
 /* Apply the animation on hover */
 .cards:hover {
-    animation: shake1 0.5s;
+    transform: scale(1.02);
 }
 .card-expanded h2{
     text-align: center;
@@ -248,9 +239,17 @@ p.price{
     height: 80vh;
     margin: 1em;
     box-shadow: 0em 10em 100em black;
-    transition: all 0.25s ease-in-out;
+
     transform: scale(1,1);
     padding: 0 2em;
+}
+
+/* Admin area editor menu */
+
+.editor-menu {
+    display: block;
+    grid-column-start: 1;
+    grid-row-start: 1;
 }
 
 .editor-boxes {
@@ -331,9 +330,6 @@ article.editor-boxes select {
     width: fit-content;
 }
 
-.editor-menu {
-    display: block;
-}
 
 .menu input, .menu label {
     display: block;

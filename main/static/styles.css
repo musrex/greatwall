@@ -391,13 +391,12 @@ article.editor-boxes select {
 --------------------------------
 ********************************/
 
-.auth {
+.admin {
+    margin: auto;
     padding: 1em;
+    width: fit-content;
     display: flex;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    grid-column-start: 2;
-    grid-column-end: 3;
+    flex-direction: column;
     background-color: var(--main-element-color);
 }
 

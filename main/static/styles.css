@@ -39,6 +39,12 @@ header, .boxes {
     margin: 0;
 }
 
+.bg-wrapper{
+    display: block;
+    position: fixed;
+    z-index: -1;
+}
+
 /****** GREAT WALL HEADER ******
 --------------------------------
 |  This sectoion contains the  |
@@ -213,12 +219,6 @@ p.price{
 }
 
 
-/* Define the shake animation */
-@keyframes shake1 {
-    0% { transform: rotate(0deg);}    
-    100% { transform: scale(1.1);}
-}
-
 /* Apply the animation on hover */
 .cards:hover {
     transform: scale(1.02);
@@ -227,7 +227,7 @@ p.price{
     text-align: center;
 }
 .card-expanded{
-    position: absolute;
+    position: fixed;
     background: linear-gradient(
         to bottom,
         #c9c9c9,
@@ -244,12 +244,15 @@ p.price{
     padding: 0 2em;
 }
 
+
 /* Admin area editor menu */
 
 .editor-menu {
+    background-color: var(--main-element-color);
     display: block;
-    grid-column-start: 1;
-    grid-row-start: 1;
+    margin: auto;
+    padding: 1em;
+    width: 80vw;
 }
 
 .editor-boxes {
@@ -290,6 +293,10 @@ label {
     padding: 0;
     margin: 1em;
     width: 2em;
+}
+
+#category, #existing_category{
+    display: none;
 }
 
 #category,
@@ -354,7 +361,7 @@ article.editor-boxes select {
     cursor: pointer;  /* change cursor to pointer on hover */
 }
 
-.tab-active {
+#buttons .tab-active {
     color: #000000; /* text color for the active tab */
 }
 

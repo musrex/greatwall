@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const newCategoryToggle = document.getElementById('new_category_toggle');
     const existingCategoryToggle = document.getElementById('existing_category_toggle');
 
-    let newTab = document.getElementById('category');
-    let existingTab = document.getElementById('existing_category')
-
     newCategoryToggle.addEventListener('change', toggleCategory);
     existingCategoryToggle.addEventListener('change', toggleCategory);
 

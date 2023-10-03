@@ -1,9 +1,18 @@
 function toggleCategory(event) {
+    let newCategoryToggle = document.getElementById('new_category_toggle');
+    let existingCategoryToggle = document.getElementById('existing_category_toggle');
+    let categoryLabel = document.getElementById('category_label');
+
+    let newTab = document.getElementById('category');
+    let existingTab = document.getElementById('existing_category')
+
     if (event.target.id === 'new_category_toggle') {
+        categoryLabel.style.dipslay = 'block';
         existingTab.style.display = 'none';
         newTab.style.display = 'block';
         existingCategoryToggle.checked = false;
     } else if ( event.target.id === 'existing_category_toggle') {
+        categoryLabel.style.dipslay = 'block';
         existingTab.style.display = 'block';
         newTab.style.display = 'none';
         newCategoryToggle.checked = false;
@@ -20,35 +29,35 @@ function addItem(){
 
 
 function switchTab(event) {
-    let btn0 = document.getElementById("btn1");
-    let btn1 = document.getElementById("btn2");
-    let btn2 = document.getElementById("btn3");
+    let btn1 = document.getElementById("btn1");
+    let btn2 = document.getElementById("btn2");
+    let btn3 = document.getElementById("btn3");
 
     let createTab = document.getElementById("create-tab");
     let deleteTab = document.getElementById("delete-tab");
     let editTab = document.getElementById("edit-tab");
     
-    if (event.target.id === "btn0") {
+    if (event.target.id === "btn1") {
         createTab.style.display = "block";
-        btn0.classList.add("tab-active");
-        btn1.classList.remove("tab-active");
-        btn2.classList.remove("tab-active");
-        deleteTab.style.display = "none";
-        editTab.style.display = "none";
-    } else if (event.target.id === "btn1") {
-        createTab.style.display = "none";
-        deleteTab.style.display = "block";
-        btn0.classList.remove("tab-active");
         btn1.classList.add("tab-active");
         btn2.classList.remove("tab-active");
+        btn3.classList.remove("tab-active");
+        deleteTab.style.display = "none";
         editTab.style.display = "none";
     } else if (event.target.id === "btn2") {
         createTab.style.display = "none";
-        deleteTab.style.display = "none";
-        editTab.style.display = "block";
-        btn0.classList.remove("tab-active");
+        deleteTab.style.display = "block";
         btn1.classList.remove("tab-active");
         btn2.classList.add("tab-active");
+        btn3.classList.remove("tab-active");
+        editTab.style.display = "none";
+    } else if (event.target.id === "btn3") {
+        createTab.style.display = "none";
+        deleteTab.style.display = "none";
+        editTab.style.display = "block";
+        btn1.classList.remove("tab-active");
+        btn2.classList.remove("tab-active");
+        btn3.classList.add("tab-active");
     }
 }
 

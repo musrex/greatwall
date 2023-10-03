@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="horizontal-wrapper">
-    <div class="content-area">
+
+    <div class="auth-area">
     <article class="menu">
         <h2>Log in</h2>
         <p>Please enter your username and password to log in.</p>
@@ -13,7 +13,8 @@
             <input type="password" name="password" id="password" required>
             <input type="submit" value="login">
         </form>
+	<p><a href="#">Forgot your password?</a></p>
     </article>
     </div>
-</div>
+
     {% endblock %}

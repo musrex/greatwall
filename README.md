@@ -2,8 +2,8 @@
 ## A Web App for small restaurants
 
 Greatwall is a simple to use web app for building websites for small restaurants. 
-The web app is pretty simple - it uses Flask on the back-end, and some good ol' CSS, 
-a sprinkling of Vanilla JS, as well as the Jinja templating engine for the front-end.  
+It uses Flask on the back-end, and some good ol' CSS, a sprinkling of Vanilla JS,
+as well as the Jinja templating engine for the front-end.  
 
 ---
 

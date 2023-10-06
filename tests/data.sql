@@ -10,5 +10,6 @@ VALUES
 
 INSERT INTO item (author_id, category, code, dish, price, notes, spicy)
 VALUES
-    (1, 'menu1', 'v43', ),
-    (),
+    (1, 'menu1', 'v43','ret34','yhd','ythdh',0),
+    (0, 'menu2', 'c23','h6t','ydh','ygdhh',0),
+    (1, 'menu3', 'd45','6wuj','gf','hjdfn',1),

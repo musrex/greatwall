@@ -12,24 +12,29 @@ def test_register(client, app):
     with app.app_context():
         assert get_db().execute(
                 "SELECT * FROM user WHERE username = 'a'",
-                ).fetchone() is not NONE
+                ).fetchone() is not None
         
-@pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('', '', b'Username is required.'),
-    ('a', '', b'Password is required.'),
-    ('test', 'test', b'Already registered'),
+@pytest.mark.parametrize(('username', 'password', 'email', 'message'), (
+    ('', 'a', 'a@a.com', 'Username is required.'),
+    ('a', '', 'a@a.com', 'Password is required.'),
+    ('a', 'a', '', 'Email is required.'),
+    ('test', 'test', 'test@email.com', 'User {} is already registered.'),
 ))
-def test_register_validate_input(client, username, password, message):
+def test_register_validate_input(client, username, password, email, message):
+    formatted_message = message.format(username).encode()
     response = client.post(
             '/auth/register',
-            data={'username': username, 'password': password}
+            data={'username': username, 'password': password, 'email' : email}
     )
-    assert message in response.data
+    assert formatted_message in response.data
 
-def test_login(client, app):
+def test_login(client, auth):
+    # Test GET Request to login route
     assert client.get('/auth/login').status_code == 200
+    
     response = auth.login()
-    assert response.headers["Location"] == "/"
+    assert response.headers['Location'] == '/'
+
 
     with client:
         client.get('/')
@@ -37,11 +42,11 @@ def test_login(client, app):
         assert g.user['username'] == 'test'
 
 @pytest.mark.parametrize(('username', 'password', 'message'), (
-    ('a','test',b'Incorrect username.'),
-    ('test','a',b'Incorrect Username.'),
+    ('a', 'test', b'Incorrect username.'),
+    ('test', 'a', b'Incorrect password.'),
 ))
 def test_login_validate_input(auth, username, password, message):
-    respone = auth.login(username, password)
+    response = auth.login(username, password)
     assert message in response.data
 
 def test_logout(client, auth):

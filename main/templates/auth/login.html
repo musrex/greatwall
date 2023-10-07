@@ -14,6 +14,15 @@
             <input type="submit" value="login">
         </form>
 	<p><a href="#">Forgot your password?</a></p>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     </article>
     </div>
 

@@ -12,9 +12,8 @@ html {
 body {
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(27,27,27,1) 15%, rgba(255,237,209,1) 100%);
     font-size: 100%;
-    display: grid;
-    grid-template-rows: 10vw 1fr;;
-    grid-template-columns: 20vw 1fr;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     margin: 0;
     overflow-y: scroll;
@@ -55,8 +54,8 @@ header, .boxes {
 ********************************/
 
 #header {
-    position: fixed;
-    margin: 1em;
+    position: relative;
+    margin: 1em auto;
     text-align: center;
     background-color: var(--main-element-color);
     width: fit-content;
@@ -184,14 +183,13 @@ address {
     position: relative;
     display: flex;
     flex-direction: column;
-    margin: 1em;
+    margin: 1em auto;
     background: linear-gradient(
         to bottom,
-        #c9c9c9,
-        var(--main-element-color) 5% 85%,
+        var(--main-element-color) 85%,
         #999999);
-    border-radius: 4px 4px 10px 10px;
-    width: 25em;
+    border-radius: 0px 0px 10px 10px;
+    width: 22em;
     height: 20em;
     overflow: hidden;
     transition: all 0.25s ease-in-out;
@@ -218,16 +216,23 @@ p.price{
     text-align: right;
 }
 
-
 /* Apply the animation on hover */
 .cards:hover {
     transform: scale(1.02);
 }
+
 .card-expanded h2{
     text-align: center;
 }
+
 .card-expanded{
+    height: 100vh;
+    width: 100vw;
     position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
     background: linear-gradient(
         to bottom,
         #c9c9c9,
@@ -235,15 +240,7 @@ p.price{
         #999999);
     overflow: scroll;
     z-index: 10;
-    width: 70vw;
-    height: 80vh;
-    margin: 1em;
-    box-shadow: 0em 10em 100em black;
-
-    transform: scale(1,1);
-    padding: 0 2em;
 }
-
 
 /* Admin area editor menu */
 
@@ -311,7 +308,6 @@ label {
 [name="price"],
 [name="save"] {
     margin-bottom: 1em;
-
 }
 
 /* This is used to position the labels on top of the inputs. */
@@ -336,7 +332,6 @@ article.editor-boxes select {
     display: block;
     width: fit-content;
 }
-
 
 .menu input, .menu label {
     display: block;
@@ -368,7 +363,6 @@ article.editor-boxes select {
 #buttons .tab:hover {
     color: black;  /* text color when hovered */
 }
-
 
 #create-tab {
     display: block;
@@ -413,3 +407,124 @@ article.editor-boxes select {
     background-color: var(--main-element-color);
     box-shadow: 0px 5px 3px rgb(112, 110, 129, 0.5);
 }
+
+/********** FOOTER *************
+--------------------------------
+|  This sectoion contains the  |
+|  CSS for the Foot section.   |
+--------------------------------
+********************************/
+
+footer{
+    display: none;
+    position: static;
+    background: black;
+    text-align: center;
+    width: 100vw;
+    bottom: 0;
+    grid-row-start: -1;
+}
+
+@media (min-width: 900px) {
+    body{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #header {
+        position: fixed;
+        margin: 1em 2em; 
+    }
+
+    .card-expanded{ 
+        position: fixed;
+        width: 70vw;
+        height: 80vh;
+        margin: 2em 0em;
+        left: unset;
+        box-shadow: 0em 10em 100em black;
+        transform: scale(1,1);
+        padding: 0 2em;
+    }
+}
+
+@media (min-width: 1200px) {
+    body{
+        display: grid;
+        grid-template-rows: 10vw 1fr;
+        grid-template-columns: 32vw 1fr;
+    }
+    
+    .menu{
+        grid-column: 2/4;
+    }
+}
+
+@media (min-width: 1400px) {
+    body{
+        grid-template-columns: 25vw 1fr;
+}
+
+@media (min-width: 1660px) {
+    body{
+        grid-template-columns: 22vw 1fr;
+    }
+    .cards{
+        margin: 1em 1em;
+    }
+}
+/*@media (max-width: 900px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        }
+
+    #header {
+        position: relative;
+        margin: 1em auto;
+    }
+
+    .cards {
+        margin: 1em auto;
+    }
+
+    .card-expanded {
+        height: 100vh;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0;
+
+    }
+}
+
+@media (min-width: 900px) {
+    body {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    #header {
+        position: fixed;
+    }
+
+    .menu {
+        grid-column-start: 2;
+        position: relative;
+        display: block;
+        justify-items:center;
+        margin: auto;
+    }
+}
+
+@media (min-width: 1200) {
+    body{
+        display: grid;
+        grid-template-rows: 10vw 1fr;
+        grid-template-columns: 20vw 1fr;
+        height: 100%;
+        margin: 0;
+    }
+}*/

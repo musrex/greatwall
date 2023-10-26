@@ -1,8 +1,42 @@
+/******************************************
+ * DishRiot
+ * Project: Greatwall DishRiot App
+ * Author: Leandro Lopez
+ * Date: 10.23.2023
+ * Version: 0.9
+ * 
+ *
+ * TABLE OF CONTENTS
+ * ----------------- 
+ * 1. Root Variables
+ * 2. General Styles
+ * 3. Header/Masthead
+ * 4. Menus
+ * 5. Admin Area    
+ * 6. Auth (login/register/password reset)
+ * 7. Footer
+ * 8. Media Queries
+ ******************************************/
+
+
+/***** 1. ROOT VARIABLES *******
+--------------------------------
+|  Variables to be used across |
+|  the entire project.         |
+--------------------------------
+********************************/
 :root {
     --main-bg-color: #d4d4d4;
     --main-element-color: #dddddd;
 }
 
+
+/****** 2. BASE STYLES *********
+--------------------------------
+|  Basic site-wide styles      |
+|  for structure and look.     |
+--------------------------------
+********************************/
 html {
     font-family: sans-serif;
     height: 100%;
@@ -44,7 +78,8 @@ header, .boxes {
     z-index: -1;
 }
 
-/****** GREAT WALL HEADER ******
+
+/**** 3. HEADER/MASTHEAD *******
 --------------------------------
 |  This sectoion contains the  |
 |  CSS for the header section  |
@@ -52,7 +87,6 @@ header, .boxes {
 |  hours, etc.                 |
 --------------------------------
 ********************************/
-
 #header {
     position: relative;
     margin: 1em auto;
@@ -139,7 +173,8 @@ address {
     margin: 2em 0 5em;
 }
 
-/************ MENUS ************
+
+/********* 4. MENUS ************
 --------------------------------
 |  This sectoion contains the  |
 |  CSS for the menu section    |
@@ -147,24 +182,6 @@ address {
 |  specials, etc.              |
 --------------------------------
 ********************************/
-
-/* This is for the admin area editor*/
-.content-area {
-    margin: 1em 50% 1em 50%;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background-color: var(--main-element-color);
-
-    /* Set the size of the element */
-    width: 100%; /* Adjust the width as per your requirement */
-}
-
-#create-tab #delete-tab #edit-tab {
-    margin: 1em;
-}
-
 .menu {
     grid-column-start: 2;
     grid-column-end: 4;
@@ -242,14 +259,25 @@ p.price{
     z-index: 10;
 }
 
-/* Admin area editor menu */
 
+/*****  5. ADMIN AREA **********
+--------------------------------
+|  This sectoion contains the  |
+|  CSS for the menu section    |
+|  with the different orders,  |
+|  specials, etc.              |
+--------------------------------
+********************************/
 .editor-menu {
-    background-color: var(--main-element-color);
     display: block;
-    margin: auto;
+    margin: 5em auto;
+    width: 40em;
+    height: fit-content;
+}
+
+.editor-body {
     padding: 1em;
-    width: 80vw;
+    background-color: var(--main-element-color);
 }
 
 .editor-boxes {
@@ -338,14 +366,14 @@ article.editor-boxes select {
 }
 
 #buttons {
+    width: fit-content;
     margin: 0;
-    background-color: var(--main-element-color);
+    background-color: var(--main-bg-color);
     display: flex;  /* display items in a row */
-    justify-content: space-between;  /* add some space between the items */
 }
 
 #buttons p {
-    margin: 1em;
+    margin: 0;
     font-weight: bolder;
     font-size: x-large;
 }
@@ -354,10 +382,12 @@ article.editor-boxes select {
     transition: color 0.5s ease;  /* animate color changes */
     color: #bbbbbb;  /* initial text color */
     cursor: pointer;  /* change cursor to pointer on hover */
+    padding: 1em;
 }
 
 #buttons .tab-active {
     color: #000000; /* text color for the active tab */
+    background-color: var(--main-element-color);
 }
 
 #buttons .tab:hover {
@@ -376,7 +406,8 @@ article.editor-boxes select {
     display: none;
 }
 
-/************ AUTH *************
+
+/********** 6. AUTH ************
 --------------------------------
 |  This sectoion contains the  |
 |  CSS for the AUTH sections,  |
@@ -384,6 +415,24 @@ article.editor-boxes select {
 |  and password reset views.   |
 --------------------------------
 ********************************/
+.auth-area {
+    background-color: var(--main-element-color);
+    box-shadow: 0px 5px 3px rgb(112, 110, 129, 0.5);
+    margin: 5em auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 25em;
+    height: fit-content;
+}
+
+.auth-area > form > * {
+    display: block;
+}
+
+.auth-area > form > input {
+    margin-bottom: .75em;
+}
 
 .admin {
     margin: auto;
@@ -408,13 +457,13 @@ article.editor-boxes select {
     box-shadow: 0px 5px 3px rgb(112, 110, 129, 0.5);
 }
 
-/********** FOOTER *************
+
+/******** 7. FOOTER ************
 --------------------------------
 |  This sectoion contains the  |
 |  CSS for the Foot section.   |
 --------------------------------
 ********************************/
-
 footer{
     display: none;
     position: static;
@@ -425,6 +474,13 @@ footer{
     grid-row-start: -1;
 }
 
+
+/***** 8. MEDIA QUERIES ********
+--------------------------------
+|  This sectoion contains the  |
+|  rules for the media queries |
+--------------------------------
+********************************/
 @media (min-width: 900px) {
     body{
         display: grid;
@@ -436,7 +492,7 @@ footer{
         margin: 1em 2em; 
     }
 
-    .card-expanded{ 
+    .card-expanded { 
         position: fixed;
         width: 70vw;
         height: 80vh;
@@ -445,6 +501,16 @@ footer{
         box-shadow: 0em 10em 100em black;
         transform: scale(1,1);
         padding: 0 2em;
+    }
+
+    .editor-menu{
+        grid-column-start: 2;
+        margin: 5em 0;
+    }
+
+    .auth-area {
+        grid-column-start: 2;
+        margin: 5em 0;
     }
 }
 
@@ -463,6 +529,7 @@ footer{
 @media (min-width: 1400px) {
     body{
         grid-template-columns: 25vw 1fr;
+    }
 }
 
 @media (min-width: 1660px) {
@@ -473,58 +540,4 @@ footer{
         margin: 1em 1em;
     }
 }
-/*@media (max-width: 900px) {
-    body {
-        display: flex;
-        flex-direction: column;
-        }
 
-    #header {
-        position: relative;
-        margin: 1em auto;
-    }
-
-    .cards {
-        margin: 1em auto;
-    }
-
-    .card-expanded {
-        height: 100vh;
-        width: 100vw;
-        position: fixed;
-        top: 0;
-        left: 0;
-        margin: 0;
-        padding: 0;
-
-    }
-}
-
-@media (min-width: 900px) {
-    body {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    #header {
-        position: fixed;
-    }
-
-    .menu {
-        grid-column-start: 2;
-        position: relative;
-        display: block;
-        justify-items:center;
-        margin: auto;
-    }
-}
-
-@media (min-width: 1200) {
-    body{
-        display: grid;
-        grid-template-rows: 10vw 1fr;
-        grid-template-columns: 20vw 1fr;
-        height: 100%;
-        margin: 0;
-    }
-}*/

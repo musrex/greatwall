@@ -67,13 +67,15 @@
     {% endfor %}
 </main>
 
+<footer>
+    <p>Developed with love by Mosca Creative</p>
+</footer>
+
 {% if g.user %}
 <p id="manager-link"><a href="{{ url_for('admin.create') }}">Menu Manager</a></p>
 {% endif %}
 
-<script
-src="{{ url_for('static', filename='scripts/cards.js') }}"
-type="module">
+<script src="{{ url_for('static', filename='scripts/cards.js') }}" type="module">
 </script>
 
 {% endblock %}

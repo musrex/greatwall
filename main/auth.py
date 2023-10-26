@@ -74,6 +74,10 @@ def login():
 
     return render_template('auth/login.html')
 
+@bp.route('/passwordReset', methods=('GET', 'POST'))
+def passwordReset():
+    return render_template('auth/passwordreset.html')
+
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')

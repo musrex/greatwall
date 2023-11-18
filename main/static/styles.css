@@ -372,10 +372,11 @@ article.editor-boxes select {
     display: flex;  /* display items in a row */
 }
 
-#buttons p {
+#buttons button {
     margin: 0;
     font-weight: bolder;
     font-size: x-large;
+    border: 0;
 }
 
 #buttons .tab {
@@ -383,6 +384,8 @@ article.editor-boxes select {
     color: #bbbbbb;  /* initial text color */
     cursor: pointer;  /* change cursor to pointer on hover */
     padding: 1em;
+    background-color: var(--main-bg-color);
+    border-bottom: 1px solid #cecece;
 }
 
 #buttons .tab-active {
@@ -406,6 +409,23 @@ article.editor-boxes select {
     display: none;
 }
 
+
+#btn1.tab.tab-active {
+    border-right: 1px solid #cecece;  /* Right border */
+    border-bottom: 0px;
+}
+
+
+#btn2.tab.tab-active {
+    border-right: 1px solid #cecece;  /* Right border */
+    border-left: 1px solid #cecece;  /* Right border */
+    border-bottom: 0px;
+}
+
+#btn3.tab.tab-active {
+    border-left: 1px solid #cecece;  /* Right border */
+    border-bottom: 0px;
+}
 
 /********** 6. AUTH ************
 --------------------------------

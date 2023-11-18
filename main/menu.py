@@ -49,7 +49,7 @@ def validate_form_data(form):
 
 def save_data(db, form, user_id):
     category = form.get('category') or form.get('existing_category')
-    save_menu_category(db, category)
+    save_menu_category(db, form, category)
     save_item(db, form, category, user_id)
 
 def save_menu_category(db, form, category):
@@ -62,8 +62,8 @@ def save_item(db, form, category, user_id):
     spicy = True if form.get('spicy') else False
     db.execute(
         'INSERT INTO item (category, code, dish, price, notes, spicy, author_id)'
-        ' VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        (category, form.get('code'), form.get('dish'), form.get('price'), form.get('notes'), spicy, form.get('spicy'), user_id)
+        ' VALUES (?, ?, ?, ?, ?, ?, ?)',
+        (category, form.get('code'), form.get('dish'), form.get('price'), form.get('notes'), form.get('spicy'), user_id)
     )
     db.commit()
 

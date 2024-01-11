@@ -19,7 +19,7 @@
  ******************************************/
 
 
-/***** 1. ROOT VARIABLES *******
+/***** 2. ROOT VARIABLES *******
 --------------------------------
 |  Variables to be used across |
 |  the entire project.         |
@@ -294,11 +294,27 @@ article.editor-boxes form {
 }
 
 form#create,
-form#delete,
 form#edit {
     display: flex;
     flex-direction: column;
     width: auto;
+}
+
+form#delete {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    height: 75vh;
+}
+
+#delete_items {
+    width: auto;
+    height: 75vh;
+    overflow-y: scroll;
+}
+
+#delete_submit {
+    width: auto;
+    margin: 2em auto;
 }
 
 #create > fieldset {
@@ -320,7 +336,7 @@ label {
     width: 2em;
 }
 
-#category, #existing_category{
+#category_input, #category_dropdown {
     display: none;
 }
 
@@ -426,6 +442,7 @@ article.editor-boxes select {
     border-left: 1px solid #cecece;  /* Right border */
     border-bottom: 0px;
 }
+
 
 /********** 6. AUTH ************
 --------------------------------

@@ -1,0 +1,24 @@
+{% extends base.html %}
+
+<article class="tab-content editor" id="edit-tab">
+                <h1 id="heading-tab"></h1>
+                <form id="edit" method="post">
+                {% for menu in menus %}
+                <h2>{{ menu['category'] }}</h2>
+                    {% for item in items %} 
+                        <input type="hidden" name="items_to_update" value="{{ item['id'] }},{{ item['code'] }},{{ item['category'] }},{{ item['dish'] }},{{ item['price'] }}">
+                        <label for="category">Menu Title</label>
+                        <input name="category" id="category" value="{{ item['category'] }}" />
+                        <label for="code">Code</label>
+                        <input name="code" id="code" value="{{ item['code'] }}" />
+                        <label for="dish">Name</label>
+                        <input name="dish" id="dish" value="{{ item['dish'] }}" />
+                        <label for="price">Price</label>
+                        <input name="price" id="price" value="{{ item['price'] }}" />
+                    {% endfor %}
+                    
+                    <input type="submit" name="edit_items" value="Save" />
+
+                {% endfor %}
+                </form>
+            </article>

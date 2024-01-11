@@ -12,26 +12,43 @@
         </nav>
 
         <div class="editor-body">            
+            
+
             <!-- Create tab -->
             <article class="tab-content editor" id="create-tab">
+
+                <!-- Import CSV -->
+                <h2>Adding Multiple Menu Items</h2>
+                <p>Please upload a CSV file:</p>
+                <form id="import_csv" method="post" enctype="multipart/form-data">
+                    <input type="file" name="file" accept=".csv">
+                    <input type="submit" name="import_csv" value="Import CSV">
+                </form>
+                
+                <!-- Add single item -->
+                <h2>Adding Single Menu Items</h2>
+                <p>Please use the form below</p>
                 <h1 id="heading-tab"></h1>
                 <form id="create" method="post">
                     <fieldset id="new_or_existing">
                         <legend>New or Existing Category?</legend>
                         <label for="new_category_toggle">New</label>
-                        <input type="checkbox" name="new_category_toggle" class="toggle" id="new_category_toggle" checked>
+                        <input type="checkbox" name="new_category_toggle" class="toggle" id="new_category_toggle" />
                         <label for="existing_category_toggle">Existing</label>
                         <input type="checkbox" name="existing_category_toggle" class="toggle" id="existing_category_toggle" />
                     </fieldset>
-
-                    <label for="category" id="category_label">Enter New Menu Title</label>
-                    <input name="category" id="category" />
-                    <label for="existing_category" class="category_label">Select Existing Menu</label>
-                    <select name="existing_category" id="existing_category">
-                        {% for menu in menus %}
-                        <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
-                        {% endfor %}
-                    </select>
+                    <div id="category_input">
+                        <label for="category">Enter New Menu Title</label>
+                        <input name="category" id="category" />
+                    </div>
+                    <div id="category_dropdown">
+                        <label for="existing_category" id="category_label">Select Existing Menu</label>
+                        <select name="existing_category" id="existing_category">
+                            {% for menu in menus %}
+                            <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                     <label for="special">Specials Menu?</label>
                     <input type="checkbox" name="special">
                     <label for="code">Code</label>
@@ -48,36 +65,49 @@
                     
                     <input type="submit" name="create_item" value="Save" />
                 </form>
+                {% for message in get_flashed_messages() %}
+                <p>{{ message }}</p>
+                {% endfor %}
             
-                <button id="add_item">Add Menu Item</button>
+                <!-- <button id="add_item">Add Menu Item</button> -->
             
-                <!-- Import CSV -->
-                <form id="import_csv" method="post" enctype="multipart/form-data">
-                    <input type="file" name="file" accept=".csv">
-                    <input type="submit" name="import_csv" value="Import CSV">
-                </form>
             </article>
 
             <!-- Delete tab -->
             <article class="tab-content editor" id="delete-tab">
                 <h1 id="heading-tab"></h1>
                 <form id="delete" method="post">
-                    {% for item in items %} 
-                        {% for menu in menus %}
-                            {% if item['category'] == menu['category'] %}
-                                <input type="checkbox" name="items_to_delete" value="{{ item['id'] }}">
-                                <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
-                            {% endif %}
-                        {% endfor %}
+                    <div id="delete_items">
+                    {% for menu in menus %}
+                        <h2>{{ menu['category'] }}</h2>
+                            {% for item in items %} 
+                                {% if item['category'] == menu['category'] %}
+                                    <p> {{ item['code'] }} | {{ item['dish'] }} | {{ item['price'] }}</p>
+                                    <input type="checkbox" name="items_to_delete" value="{{ item['id'] }}">
+                                {% endif %}
+                            {% endfor %}
                     {% endfor %}
-                    <input type="submit" name="delete_items" value="Delete" />
+                    </div>
+                    <div id="delete_submit">
+                    <input type="submit" name="delete_items" value="Delete Selected Items?"/>
+                    </div>
                 </form>
             </article>
             
             <!-- Edit tab -->
             <article class="tab-content editor" id="edit-tab">
                 <h1 id="heading-tab"></h1>
-                <form id="edit" method="post">
+                <label for="edit_select" value="Select the Menu to Edit"></label>
+                <select id="edit_selector" name="edit_select">
+                    {% for menu in menus %}
+                    <option value="{{ menu['category'] }}">{{ menu['category'] }}</option>
+                    {% endfor %}
+                </select>
+                <div id="edit_data_container">
+                </div>
+                <!-- <form id="edit" method="post">
+                {% for menu in menus %}
+                <h2>{{ menu['category'] }}</h2>
                     {% for item in items %} 
                         <input type="hidden" name="items_to_update" value="{{ item['id'] }},{{ item['code'] }},{{ item['category'] }},{{ item['dish'] }},{{ item['price'] }}">
                         <label for="category">Menu Title</label>
@@ -89,9 +119,12 @@
                         <label for="price">Price</label>
                         <input name="price" id="price" value="{{ item['price'] }}" />
                     {% endfor %}
+                    
                     <input type="submit" name="edit_items" value="Save" />
-                </form>
-            </article>
+
+                {% endfor %}
+                </form> -->
+             </article>
         </div>
 
     </main>

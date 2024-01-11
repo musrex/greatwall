@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for, current_app
+    Blueprint, flash, g, redirect, render_template, request, url_for, current_app, jsonify
 )
 from werkzeug.exceptions import abort
 from werkzeug.utils import secure_filename
@@ -41,8 +41,17 @@ def get_all_menus(db):
 def get_all_items(db):
     return db.execute('SELECT * FROM item').fetchall()
 
+def get_items_for_menu(db,menu):
+    return db.execute('SELECT * FROM item WHERE category = ?', (menu,)).fetchall()
+
 def validate_form_data(form):
-    fields = ['category', 'code', 'dish', 'price']
+    category = form.get('category')
+    existing_category = form.get('existing_category')
+    
+    if bool(category) == bool(existing_category):
+        return 'Only one option, "New" Category or "Existing" Category may be selected'
+
+    fields = ['code', 'dish', 'price']
     errors = {field: f'{field.capitalize()} is required.' for field in fields if not form.get(field)}
     return ', '.join(errors.values()) if errors else None
 
@@ -64,6 +73,15 @@ def save_item(db, form, category, user_id):
         'INSERT INTO item (category, code, dish, price, notes, spicy, author_id)'
         ' VALUES (?, ?, ?, ?, ?, ?, ?)',
         (category, form.get('code'), form.get('dish'), form.get('price'), form.get('notes'), form.get('spicy'), user_id)
+    )
+    db.commit()
+
+def update_item(db, form, user_id):
+    spicy = True if form.get('spicy') else False
+    db.execute(
+        'UPDATE INTO item (category, code, dish, price)'
+            ' VALUES (?, ?, ?, ?',
+            (form.get('category'), form.get('code'), form.get('dish'), form.get('price'), user_id)
     )
     db.commit()
 
@@ -96,10 +114,18 @@ def create():
                 flash(error)
             else:
                 save_data(db, request.form, g.user['id'])
+                flash('Successfully added item')
+                return render_template('menu/create.html', menus=menus, items=items)
         
+        # DELETE ITEMS
         elif request.form.get('delete_items'):
             delete_items(db, request.form.get('items_to_delete'))
         
+        elif request.form(get('edit')):
+            update_items(db, request.form.get('edit'), g.user['id'])
+
+
+        # IMPORT CSV
         elif request.form.get('import_csv'):
             file_object = request.files['file']
             if file_object.filename == '':
@@ -110,9 +136,19 @@ def create():
                 file_object.save(file_path)
                 import_CSV(db, file_path)
                 return redirect(url_for('index'))
-            
+          
         return redirect(url_for('index'))
         
-
-
     return render_template('menu/create.html', menus=menus, items=items)
+
+
+@bp.route('/edit/<menu>')
+@login_required
+def edit(menu):
+    db = get_db()
+    menus = get_all_menus(db)
+    items = get_items_for_menu(db, menu)
+    
+    items_list = [dict(item) for item in items]
+    return jsonify(items_list)
+

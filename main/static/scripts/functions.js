@@ -1,18 +1,18 @@
 function toggleCategory(event) {
     let newCategoryToggle = document.getElementById('new_category_toggle');
     let existingCategoryToggle = document.getElementById('existing_category_toggle');
-    let categoryLabel = document.getElementById('category_label');
+    //let categoryLabel = document.getElementById('category_label');
 
-    let newTab = document.getElementById('category');
-    let existingTab = document.getElementById('existing_category')
+    let newTab = document.getElementById('category_input');
+    let existingTab = document.getElementById('category_dropdown')
 
     if (event.target.id === 'new_category_toggle') {
-        categoryLabel.style.dipslay = 'block';
+        //categoryLabel.style.dipslay = 'block';
         existingTab.style.display = 'none';
         newTab.style.display = 'block';
         existingCategoryToggle.checked = false;
     } else if ( event.target.id === 'existing_category_toggle') {
-        categoryLabel.style.display = 'block';
+        //categoryLabel.style.display = 'block';
         existingTab.style.display = 'block';
         newTab.style.display = 'none';
         newCategoryToggle.checked = false;

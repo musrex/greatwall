@@ -121,7 +121,7 @@ def create():
         elif request.form.get('delete_items'):
             delete_items(db, request.form.get('items_to_delete'))
         
-        elif request.form(get('edit')):
+        elif request.form.get('edit'):
             update_items(db, request.form.get('edit'), g.user['id'])
 
 
